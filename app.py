@@ -13,8 +13,10 @@ import base64
 
 app = Flask(__name__, static_folder='static', static_url_path='/')
 
+
 def base64_encode(img):
     return str(base64.b64encode(cv.imencode('.jpg', img)[1]))[2:-1]
+
 
 def base_response(status=200, message='ok', data=None):
     return {
@@ -24,11 +26,11 @@ def base_response(status=200, message='ok', data=None):
     }
 
 
-def style_transfer(image, args):
-    return transfer.style_transfer(image, args['model'])
+def style_transfer(images, args):
+    return transfer.style_transfer(images[0], args['model'])
 
 
-def new_operation(image, args):
+def new_operation(images, args):
     print('do something with the image')
 
 
@@ -52,9 +54,11 @@ def index():  # put application's code here
 @app.route('/process', methods=['POST'])
 def upload():
     # parse form data
-    command = request.form['command']
-    file = request.files['file']
-    dst = './images/' + str(uuid.uuid1())
+    command = request.form.get('command')
+    files = request.files.getlist('files')
+    dst = []
+    for file in files:
+        dst.append('./images/' + str(uuid.uuid1()))
 
     args = {}
     try:
@@ -66,14 +70,16 @@ def upload():
     do_command = command_map.get(command)
     if do_command:
         try:
-            file.save(dst)
+            for i in range(len(files)):
+                files[i].save(dst[i])
             resp_data = do_command(dst, args)
             resp_data = base64_encode(resp_data)
         except Exception as e:
             raise e
         finally:
             # clean tmp file
-            os.remove(dst)
+            for path in dst:
+                os.remove(path)
     else:
         raise Exception(f'unknown command: {command}')
 

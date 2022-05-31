@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DIPFA</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app" class="app">
+  <div class="aside-section">
+    <el-menu
+      default-active="0"
+      class="aside-menu-vertical"
+      @select="selectAsideCollapse">
+      <el-menu-item v-for="(menu,i) in asideMenu" :index="i+''">
+        <i class="el-icon-menu"></i>
+        <span slot="title">{{menu}}</span>
+      </el-menu-item>
+    </el-menu>
+    
+    <div class="aside-collapse">
+      <el-collapse accordion v-model="currentCollapseName" @change="onCollapseChange">
+        <!-- 图像调整 -->
+        <template v-if="0 == selectedAsideMenu">
+          <el-collapse-item title="裁剪" name="adjust-01">
+            <el-button type="primary" @click="startCrop">裁剪</el-button>
+            <div>
+              宽度：<el-input v-model="displayCropperWidth" @change="setCropperSize"></el-input>
+            </div>
+            <div>
+              高度：<el-input v-model="displayCropperHeight" @change="setCropperSize"></el-input>
+            </div>
+          </el-collapse-item>
+        </template>
+        
+        <!-- 基本计算 -->
+        <template v-if="1 == selectedAsideMenu">
+          <el-collapse-item title="逻辑运算" name="compute-01[mul]">
+            <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
+            <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+          </el-collapse-item>
+          <el-collapse-item title="算术运算" name="compute-02[mul]">
+            <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+          </el-collapse-item>
+        </template>
+
+      </el-collapse>
+
+    </div>
+  </div>
+
+  <div class="display-section">
+    <div class="img-container">
+      <vue-cropper 
+          v-if="inCrop"
+          ref="cropper" 
+          class="img-cropper" 
+          :img="currentImage === null ? '' : images[currentImage]"
+          :output-size="1"
+          :auto-crop="true"
+          :auto-crop-width="cropper.width"
+          :auto-crop-height="cropper.height"
+          :center-box="true"
+          :info-true="true"
+          :fixed="false"
+          :fixed-box="false"
+          @real-time="onCropperMove"></vue-cropper>
+      <img v-else 
+           class="current-image" 
+           :class="multiInput ? 'half-width' : ''"
+           :src="currentImage === null ? '' : images[currentImage]" 
+           alt="">
+      
+      <!-- second img uploader -->
+      <template v-if="currentImage!==null && multiInput">
+        <div style="margin: 0 10px;">+</div>
+        <el-upload
+          class="second-uploader"
+          action="#"
+          drag
+          :show-file-list="false"
+          :before-upload="uploadSecondImage">
+          <img v-if="secondImage" :src="secondImage" class="second-image">
+          <i v-else class="el-icon-plus second-uploader-icon"></i>
+        </el-upload>
+      </template>
+      
+      <!-- action -->
+      <div class="img-action">
+        <el-button type="primary" @click="confirmAction">确 定</el-button>
+        <el-button @click="cancelAction">取 消</el-button>
+      </div>
+    </div>
+    <div class="img-selector">
+      <img class="img-selector-item" 
+           v-for="(img,i) in images" 
+           @click="switchImage(i)"
+           :src="img" 
+           alt="">
+      <el-upload
+        class="img-uploader"
+        action="#"
+        :show-file-list="false"
+        :before-upload="uploadImage">
+        <el-button size="small" type="primary">点击上传</el-button>
+      </el-upload>
+    </div>
+  </div>
+
+  <template>
+
+  </template>
+</div>
+</body>
+<script src="/js/vue.js"></script>
+<script src="/js/element.js"></script>
+<script src="/js/cropper.js"></script>
+<script src="/js/index.js"></script>
+</html>
