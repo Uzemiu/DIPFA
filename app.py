@@ -8,7 +8,7 @@ import cv2 as cv
 
 import transfer
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
 import base64
 
 app = Flask(__name__, static_folder='static', static_url_path='/')
@@ -48,7 +48,8 @@ def exception_handler(e):
 
 @app.route('/')
 def index():  # put application's code here
-    return render_template('index.html')
+    # return render_template('index.html')
+    return send_file('./static/index.html')
 
 
 @app.route('/process', methods=['POST'])
