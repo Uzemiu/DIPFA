@@ -14,9 +14,9 @@
       default-active="0"
       class="aside-menu-vertical"
       @select="selectAsideCollapse">
-      <el-menu-item v-for="(menu,i) in asideMenu" :index="i+''">
+      <el-menu-item v-for="(menu,i) in asideMenu" :index="i+''" :key="i">
         <i class="el-icon-menu"></i>
-        <span slot="title">{{menu}}</span>
+        <span slot="title"><span>{{menu}}</span></span>
       </el-menu-item>
     </el-menu>
     
@@ -115,6 +115,7 @@
   </template>
 </div>
 </body>
+<script src="/js/axios.js"></script>
 <script src="/js/vue.js"></script>
 <script src="/js/element.js"></script>
 <script src="/js/cropper.js"></script>

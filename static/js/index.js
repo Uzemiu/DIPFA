@@ -1,3 +1,14 @@
+(function initAxios(){
+  axios.interceptors.response.use(
+    function(response) {
+      console.log(response);
+    },
+    function(error) {
+      return Promise.reject(error);
+    }
+  );
+})();
+
 const app = new Vue({
   el: '#app',
   data: {
