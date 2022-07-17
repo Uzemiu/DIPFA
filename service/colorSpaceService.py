@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@File : 123.py
+@File : colorSpaceService.py
 @Author: csc
 @Date : 2022/6/22
 色彩空间
@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 
 
-def getRGB(img):
+def getRGB(img) -> tuple:
     """
     返回 RGB 三个通道对应的彩色图
     """
@@ -18,7 +18,7 @@ def getRGB(img):
     return cv2.merge([zeros, zeros, r]), cv2.merge([zeros, g, zeros]), cv2.merge([b, zeros, zeros])
 
 
-def getHSV(img):
+def getHSV(img) -> tuple:
     """
     返回 HSV 三个通道对应的彩色图
     """
