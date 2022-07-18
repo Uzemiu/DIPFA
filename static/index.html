@@ -38,12 +38,91 @@
         <!-- 基本计算 -->
         <template v-if="1 == selectedAsideMenu">
           <el-collapse-item title="逻辑运算" name="compute-01[mul]">
-            <div>控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；</div>
-            <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+            <el-button-group>
+              <el-button v-for="(op,i) in logicOp" 
+                         :key="i" 
+                         @click="setCommand(op[0])" 
+                         :type="command===op[0] ? 'primary' : ''" 
+                         size="medium">{{op[1]}}</el-button>
+            </el-button-group>
+            <el-button type="primary" @click="confirmAction" size="medium">确 定</el-button>
           </el-collapse-item>
           <el-collapse-item title="算术运算" name="compute-02[mul]">
-            <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-            <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+            <el-button-group>
+              <el-button v-for="(op,i) in arthimaticOp" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-button type="primary" @click="confirmAction" size="medium">确 定</el-button>
+          </el-collapse-item>
+          <el-collapse-item title="几何变换运算" name="compute-03">
+            <el-button-group>
+              <el-button v-for="(op,i) in geometricOp" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="78px">
+              <template v-if="command==='scale' || command==='rotate'">
+                <el-form-item label="x">
+                  <el-input v-model="geometricOpArgs.x" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item label="y">
+                  <el-input v-model="geometricOpArgs.y" size="medium"></el-input>
+                </el-form-item>
+              </template>
+              <template v-if="command==='scale' || command==='translate'">
+                <el-form-item :label="command==='scale' ? 'x轴缩放' : 'x平移距离'">
+                  <el-input v-model="geometricOpArgs.xArg" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item :label="command==='scale' ? 'y轴缩放' : 'y平移距离'">
+                  <el-input v-model="geometricOpArgs.yArg" size="medium"></el-input>
+                </el-form-item>
+              </template>
+              <template v-if="command==='rotate'">
+                <el-form-item label="旋转角度">
+                  <el-input v-model="geometricOpArgs.deg" size="medium"></el-input>
+                </el-form-item>
+              </template>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(geometricOpArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+        </template>
+
+        <!-- 边缘检测 -->
+        <template v-if="2 == selectedAsideMenu">
+          <el-collapse-item title="边缘检测" name="edge-01">
+            <el-button-group>
+              <el-button v-for="(op,i) in edgeOp" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="84px">
+              <template v-if="['laplacian','LoG','canny'].indexOf(command) >= 0">
+                <el-form-item label="滤波器大小">
+                  <el-input v-model="edgeArgs.blurSize" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item label="核大小">
+                  <el-input v-model="edgeArgs.ksize" size="medium"></el-input>
+                </el-form-item>
+                <template v-if="command === 'canny'">
+                  <el-form-item label="最低阈值">
+                    <el-input v-model="edgeArgs.threshold1" size="medium"></el-input>
+                  </el-form-item>
+                  <el-form-item label="最高阈值">
+                    <el-input v-model="edgeArgs.threshold2" size="medium"></el-input>
+                  </el-form-item>
+                </template>
+              </template>
+            </el-form>
           </el-collapse-item>
         </template>
 
@@ -89,7 +168,7 @@
       </template>
       
       <!-- action -->
-      <div class="img-action">
+      <div class="img-action" v-if="inCrop">
         <el-button type="primary" @click="confirmAction">确 定</el-button>
         <el-button @click="cancelAction">取 消</el-button>
       </div>
@@ -110,9 +189,18 @@
     </div>
   </div>
 
-  <template>
+  <el-dialog
+    title="提示"
+    :visible.sync="dialogVisible"
+    width="50%">
+    <img class="result-image" :src="resultImage" alt="">
+    <span slot="footer" class="dialog-footer">
+      <el-button type="primary" @click="replaceResultImage">替换当前图像</el-button>
+      <el-button type="primary" @click="addResultImage">添加为新图像</el-button>
+      <el-button @click="dialogVisible = false">取 消</el-button>
+    </span>
+  </el-dialog>
 
-  </template>
 </div>
 </body>
 <script src="/js/axios.js"></script>
