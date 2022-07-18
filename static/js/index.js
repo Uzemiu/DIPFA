@@ -152,7 +152,7 @@ const app = new Vue({
         }
         files.push(this.secondImage)
       }
-      this.process(files, this.command);
+      this.process(files, this.command, args);
     },
     //---collapse---
     onCollapseChange(newCollapse){

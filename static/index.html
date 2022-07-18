@@ -68,11 +68,11 @@
               </el-button-group>
             </el-button-group>
             <el-form class="geo-form" label-position="right" label-width="78px">
-              <template v-if="command==='scale' || command==='rotate'">
-                <el-form-item label="x">
+              <template v-if="command==='rotate'">
+                <el-form-item label="旋转中心x">
                   <el-input v-model="geometricOpArgs.x" size="medium"></el-input>
                 </el-form-item>
-                <el-form-item label="y">
+                <el-form-item label="旋转中心y">
                   <el-input v-model="geometricOpArgs.y" size="medium"></el-input>
                 </el-form-item>
               </template>
@@ -110,7 +110,7 @@
                 <el-form-item label="滤波器大小">
                   <el-input v-model="edgeArgs.blurSize" size="medium"></el-input>
                 </el-form-item>
-                <el-form-item label="核大小">
+                <el-form-item v-if="command === 'laplacian'" label="核大小">
                   <el-input v-model="edgeArgs.ksize" size="medium"></el-input>
                 </el-form-item>
                 <template v-if="command === 'canny'">
@@ -123,6 +123,7 @@
                 </template>
               </template>
             </el-form>
+            <el-button type="primary" @click="confirmAction(edgeArgs)" size="medium">确 定</el-button>
           </el-collapse-item>
         </template>
 
