@@ -126,6 +126,82 @@
             <el-button type="primary" @click="confirmAction(edgeArgs)" size="medium">确 定</el-button>
           </el-collapse-item>
         </template>
+        
+        <!-- 噪声滤波 -->
+        <template v-if="5 == selectedAsideMenu">
+          <el-collapse-item title="噪声" name="noise-01">
+            <el-button-group>
+              <el-button v-for="(op,i) in noiseOp" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="100px">
+              <template v-if="command === 'spNoise'">
+                <el-form-item label="椒盐比">
+                  <el-input v-model="noiseArgs.svp" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item label="噪声数量比例">
+                  <el-input v-model="noiseArgs.amount" size="medium"></el-input>
+                </el-form-item>
+              </template>
+              <template v-if="command === 'gaussianNoise'">
+                <el-form-item label="均值">
+                  <el-input v-model="noiseArgs.mean" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item label="标准差">
+                  <el-input v-model="noiseArgs.sigma" size="medium"></el-input>
+                </el-form-item>
+              </template>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(noiseArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+          <el-collapse-item title="滤波" name="blur-01">
+            <el-button-group>
+              <el-button v-for="(op,i) in blurOp" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="90px">
+              <template v-if="['avgBlur','gaussianBlur'].indexOf(command) >= 0">
+                <el-form-item label="滤波器x大小">
+                  <el-input v-model="blurArgs.x" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item label="滤波器y大小">
+                  <el-input v-model="blurArgs.y" size="medium"></el-input>
+                </el-form-item>
+              </template>
+              <el-form-item v-else label="滤波核大小">
+                <el-input v-model="blurArgs.ksize" size="medium"></el-input>
+              </el-form-item>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(blurArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+          <el-collapse-item title="选择性滤波" name="blur-02">
+            <el-button-group>
+              <el-button v-for="(op,i) in selectiveOp" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="72px">
+              <el-form-item v-if="command !== 'lowPass'" label="滤波下限">
+                <el-input v-model="selectiveArgs.threshold1" size="medium"></el-input>
+              </el-form-item>
+              <el-form-item v-if="command !== 'highPass'" label="滤波上限">
+                <el-input v-model="selectiveArgs.threshold2" size="medium"></el-input>
+              </el-form-item>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(selectiveArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+        </template>
 
       </el-collapse>
 

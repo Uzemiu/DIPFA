@@ -71,7 +71,7 @@ const app = new Vue({
       ['roberts', 'Roberts'],
       ['sobel', 'Sobel'],
       ['laplacian', 'Laplacian'],
-      ['LoG', 'Log'],
+      ['LoG', 'LoG'],
       ['canny', 'Canny']
     ],
     edgeArgs: {
@@ -79,6 +79,38 @@ const app = new Vue({
       ksize: 3,
       threshold1: 50,
       threshold2: 150
+    },
+    noiseOp: [
+      ['spNoise', '椒盐噪声'],
+      ['gaussianNoise', '高斯噪声'],
+    ],
+    noiseArgs: {
+      svp: 0.5,
+      amount: 0.04,
+      mean: 0,
+      sigma: 25
+    },
+    blurOp: [
+      ['avgBlur', '均值滤波'],
+      ['medBlur', '中值滤波'],
+      ['gaussianBlur', '高斯滤波'],
+      ['geometricBlur', '几何均值滤波'],
+      ['harmonicBlur', '谐波均值滤波']
+    ],
+    blurArgs: {
+      x: 3,
+      y: 3,
+      ksize: 3
+    },
+    selectiveOp: [
+      ['lowPass', '低通滤波'],
+      ['highPass', '高通滤波'],
+      ['bandPass', '带通滤波'],
+      ['bandStop', '带阻滤波'],
+    ],
+    selectiveArgs: {
+      threshold1: 0,
+      threshold2: 255
     }
   },
   methods: {
