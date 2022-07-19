@@ -16,3 +16,12 @@ def figure2ndarray(fig):
     buf_ndarray = np.frombuffer(fig.canvas.tostring_rgb(), dtype='u1')
     img = buf_ndarray.reshape(h, w, 3)
     return img
+
+
+def inArea(point: tuple, area: tuple):
+    """
+    点是否在区域内
+    point: (x0, y0)
+    area: ((x1, y1), (x2, y2))
+    """
+    return area[0][0] <= point[0] <= area[1][0] and area[0][1] <= point[1] <= area[1][1]
