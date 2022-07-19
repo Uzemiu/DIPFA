@@ -9,6 +9,7 @@ import cv2 as cv
 import transfer
 import service.computeService as compute_service
 import service.edgeDetectionService as edge_detection_service
+import service.noiseBlurService as noise_blur_service
 
 from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS, cross_origin
@@ -33,6 +34,7 @@ def base_response(status=200, message='ok', data=None):
 def style_transfer(images, args):
     return transfer.style_transfer(images[0], args['model'])
 
+
 command_map = {
     # 基本计算
     'and': compute_service.andOp,
@@ -51,6 +53,21 @@ command_map = {
     'laplacian': edge_detection_service.laplacian,
     'LoG': edge_detection_service.LoG,
     'canny': edge_detection_service.canny,
+    # 噪声滤波,
+    # 添加噪声
+    'spNoise': noise_blur_service.sp_noise,
+    'gaussianNoise': noise_blur_service.gaussian_noise,
+    # 均值/排序统计滤波
+    'avgBlur': noise_blur_service.avg_blur,
+    'medBlur': noise_blur_service.med_blur,
+    'gaussianBlur': noise_blur_service.gaussian_blur,
+    'geometricBlur': noise_blur_service.geometric_blur,
+    'harmonicBlur': noise_blur_service.harmonic_blur,
+    # 选择性滤波
+    'lowPass': noise_blur_service.low_pass_filter,
+    'highPass': noise_blur_service.high_pass_filter,
+    'bandPass': noise_blur_service.band_pass_filter,
+    'bandStop': noise_blur_service.band_stop_filter,
     # 风格迁移
     'transfer': style_transfer,
 }
