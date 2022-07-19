@@ -7,11 +7,15 @@ import numpy as np
 import cv2 as cv
 
 import transfer
+import service.computeService as compute_service
+import service.edgeDetectionService as edge_detection_service
 
 from flask import Flask, request, jsonify, render_template, send_file
+from flask_cors import CORS, cross_origin
 import base64
 
 app = Flask(__name__, static_folder='static', static_url_path='/')
+cors = CORS(app)
 
 
 def base64_encode(img):
@@ -29,12 +33,25 @@ def base_response(status=200, message='ok', data=None):
 def style_transfer(images, args):
     return transfer.style_transfer(images[0], args['model'])
 
-
-def new_operation(images, args):
-    print('do something with the image')
-
-
 command_map = {
+    # 基本计算
+    'and': compute_service.andOp,
+    'or': compute_service.orOp,
+    'not': compute_service.notOp,
+    'add': compute_service.add,
+    'subtract': compute_service.subtract,
+    'multiply': compute_service.multiply,
+    'divide': compute_service.divide,
+    'scale': compute_service.scale,
+    'translate': compute_service.translate,
+    'rotate': compute_service.rotate,
+    # 边缘检测
+    'roberts': edge_detection_service.roberts,
+    'sobel': edge_detection_service.sobel,
+    'laplacian': edge_detection_service.laplacian,
+    'LoG': edge_detection_service.LoG,
+    'canny': edge_detection_service.canny,
+    # 风格迁移
     'transfer': style_transfer,
 }
 
@@ -48,7 +65,6 @@ def exception_handler(e):
 
 @app.route('/')
 def index():  # put application's code here
-    # return render_template('index.html')
     return send_file('./static/index.html')
 
 
@@ -73,7 +89,10 @@ def upload():
         try:
             for i in range(len(files)):
                 files[i].save(dst[i])
-            resp_data = do_command(dst, args)
+            imgs = []
+            for d in dst:
+                imgs.append(cv.imread(d, 1))
+            resp_data = do_command(imgs, args)
             resp_data = base64_encode(resp_data)
         except Exception as e:
             raise e
@@ -82,7 +101,7 @@ def upload():
             for path in dst:
                 os.remove(path)
     else:
-        raise Exception(f'unknown command: {command}')
+        raise Exception(f'未知命令: {command}')
 
     return jsonify(base_response(data=resp_data))
 
