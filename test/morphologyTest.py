@@ -10,8 +10,7 @@ import service.morphologyService as morphologyService
 img = cv2.imread('./img.jpg')
 args = {
     'kernelType': 'morph cross',
-    'kernelX': 3,
-    'kernelY': 4
+    'kernelSize': [3, 4]
 }
 
 

@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from utils import figure2ndarray
 
 
-def histCover(img):
+def histCover(img, args):
     """
     获取 img 的直方图
     返回一张有三条折线的直方图

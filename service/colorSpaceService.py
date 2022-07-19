@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 
 
-def getRGB(img) -> tuple:
+def getRGB(img, args) -> tuple:
     """
     返回 RGB 三个通道对应的彩色图
     """
@@ -18,7 +18,7 @@ def getRGB(img) -> tuple:
     return cv2.merge([zeros, zeros, r]), cv2.merge([zeros, g, zeros]), cv2.merge([b, zeros, zeros])
 
 
-def getHSV(img) -> tuple:
+def getHSV(img, args) -> tuple:
     """
     返回 HSV 三个通道对应的彩色图
     """

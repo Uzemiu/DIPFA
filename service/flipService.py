@@ -11,14 +11,14 @@ HORIZONTAL = 1
 VERTICAL = 0
 
 
-def horizontalFlip(img):
+def horizontalFlip(img, args):
     """
     水平翻转图像
     """
     return cv2.flip(img, HORIZONTAL)
 
 
-def verticalFlip(img):
+def verticalFlip(img, args):
     """
     垂直翻转图像
     """
