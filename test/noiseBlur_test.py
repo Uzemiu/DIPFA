@@ -17,6 +17,7 @@ def test_sp_noise():
     display('sp_noise', res)
 
 
+# 有问题，但前端正常
 def test_gaussian_noise():
     res = noiseBlurService.gaussian_noise([img], {'mean': 0.0, 'sigma': 25})
     display('gaussian_noise', res)
@@ -43,7 +44,7 @@ def test_med_blur():
 
 
 def test_gaussian_blur():
-    res = noiseBlurService.gaussian_blur([blur], {'x': 5, 'y': 5})
+    res = noiseBlurService.gaussian_blur([blur], {'x': 0, 'y': 5})
     display('gaussian_blur', res)
 
 

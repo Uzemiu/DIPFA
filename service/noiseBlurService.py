@@ -34,11 +34,10 @@ def gaussian_noise(imgs, args):
     sigma: float | 标准差
     :return: img
     """
-    # TODO 有问题
-    image = imgs[0] / 255.0
+    image = imgs[0]
     h, w, c = image.shape
-    mean = float(args['mean'])
-    sigma = float(args['sigma'])
+    mean = int(args['mean'])
+    sigma = int(args['sigma'])
     gauss = np.random.normal(mean, sigma, (h, w, c))
     noisy_img = image + gauss
     return np.clip(noisy_img, a_min=0, a_max=255)
@@ -100,7 +99,8 @@ def med_blur(imgs, args):
 
 def gaussian_blur(imgs, args):
     """
-    TODO
+    高斯滤波
+    x, y: int, int | 滤波器大小
     """
     return cv2.GaussianBlur(imgs[0], (int(args['x']), int(args['y'])), 0)
 
