@@ -159,6 +159,17 @@
             </el-form>
             <el-button type="primary" @click="confirmAction(filterArgs1)" size="medium">确 定</el-button>
           </el-collapse-item>
+          <el-collapse-item title="空域的平滑/锐化" name="augment-02">
+            <el-button-group>
+              <el-button v-for="(op,i) in filterOp2" 
+                        :key="i" 
+                        @click="setCommand(op[0])" 
+                        :type="command===op[0] ? 'primary' : ''" 
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-button type="primary" @click="confirmAction" size="medium">确 定</el-button>
+          </el-collapse-item>
         </template>
 
         <!-- 形态学操作 -->
@@ -271,6 +282,14 @@
 
   <div class="display-section">
     <div class="img-container">
+      <div class="el-loading-mask" v-if="loading">
+        <div class="el-loading-spinner">
+          <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
+          <p class="el-loading-text">图片处理中</p>
+          <el-button size="medium" type="text" @click="cancelAction">取消</el-button>
+        </div>
+      </div>
+
       <vue-cropper 
           v-if="inCrop"
           ref="cropper" 

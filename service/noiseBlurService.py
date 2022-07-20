@@ -35,6 +35,32 @@ def avg_blur(imgs, args):
     return cv2.blur(imgs[0], (int(args['x']), int(args['y'])))
 
 
+def max_blur(imgs, args):
+    image = imgs[0]
+    h, w, c = image.shape
+    output = np.zeros(image.shape, np.uint8)
+    ksize = int(args['ksize'])
+    k2 = int(ksize / 2)
+    for i in range(k2, h - k2):
+        for j in range(k2, w - k2):
+            for ch in range(c):
+                output[i, j, ch] = np.max(image[i - k2:i + k2 + 1, j - k2:j + k2 + 1, ch])
+    return output
+
+
+def min_blur(imgs, args):
+    image = imgs[0]
+    h, w, c = image.shape
+    output = np.zeros(image.shape, np.uint8)
+    ksize = int(args['ksize'])
+    k2 = int(ksize / 2)
+    for i in range(k2, h - k2):
+        for j in range(k2, w - k2):
+            for ch in range(c):
+                output[i, j, ch] = np.min(image[i - k2:i + k2 + 1, j - k2:j + k2 + 1, ch])
+    return output
+
+
 def med_blur(imgs, args):
     return cv2.medianBlur(imgs[0], int(args['ksize']))
 

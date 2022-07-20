@@ -10,9 +10,6 @@
   );
 })();
 
-Object.assign(window, {
-  'COMMAND_ADD': 'add'
-})
 
 const app = new Vue({
   el: '#app',
@@ -22,6 +19,7 @@ const app = new Vue({
     resultImage: null,
     images: [],
     inCrop: false,
+    loading: false,
     command: '',
     // cropper
     cropper:{
@@ -99,7 +97,9 @@ const app = new Vue({
     },
     // 滤波01
     blurOp: [
+      ['maxBlur', '最大值滤波'],
       ['avgBlur', '均值滤波'],
+      ['minBlur', '最小值滤波'],
       ['medBlur', '中值滤波'],
       ['gaussianBlur', '高斯滤波'],
       ['geometricBlur', '几何均值滤波'],
@@ -145,9 +145,12 @@ const app = new Vue({
       d0: 50,
       n: 2
     },
-    // 频域的平滑
+    // 空域的平滑
     filterOp2: [
-      
+      ['robertsGrad', 'Roberts算子'],
+      ['sobelGrad', 'Sobel算子'],
+      ['prewittGrad', 'Prewitt算子'],
+      ['laplacianGrad', 'Laplacian算子'],
     ],
   },
   methods: {
@@ -199,8 +202,14 @@ const app = new Vue({
         this.cancelCrop();
         return;
       }
+      // cancel request
+      this.controller.abort();
     },
     confirmAction(args){
+      if(this.loading){
+        this.$message.warning('正在进行其他处理操作')
+        return;
+      }
       if(this.inCrop){
         this.endCrop();
         return;
@@ -245,6 +254,9 @@ const app = new Vue({
         });
       }
 
+      this.loading = true;
+      this.controller = new AbortController();
+
       const param = new FormData();
       base64Images.forEach((img,i) => {
         param.append('files', dataURLtoBlob(img),new Date().getTime() + '' + i);
@@ -252,13 +264,19 @@ const app = new Vue({
       param.append('command', command);
       param.append('args', JSON.stringify(args));
       return axios.post('/process', param, {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        signal: this.controller.signal
       }).then(data => {
         this.resultImage = 'data:image/jpeg;base64,' + data.data;
         this.dialogVisible = true;
       }).catch(e => {
-        const msg = e.response.data.message;
-        this.$message.error(msg);
+        console.error(e);
+        if(e.response){
+          const msg = e.response.data.message;
+          this.$message.error(msg);
+        }
+      }).finally(() => {
+        this.loading = false;
       });
     },
     uploadImage(file, onload){
