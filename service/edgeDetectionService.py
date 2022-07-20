@@ -2,7 +2,10 @@ import cv2
 import numpy as np
 
 
-def roberts(imgs, args):
+def roberts(imgs, args=None):
+    """
+    Roberts 算子
+    """
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     kernelx = np.array([[-1, 0], [0, 1]], dtype=int)
     kernely = np.array([[0, -1], [1, 0]], dtype=int)
@@ -16,7 +19,10 @@ def roberts(imgs, args):
     return Roberts
 
 
-def sobel(imgs, args):
+def sobel(imgs, args=None):
+    """
+    Sobel 算子
+    """
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     x = cv2.Sobel(img, cv2.CV_16S, 1, 0)
     y = cv2.Sobel(img, cv2.CV_16S, 0, 1)
@@ -27,6 +33,11 @@ def sobel(imgs, args):
 
 
 def laplacian(imgs, args):
+    """
+    Laplacian 算子
+    blurSize: 高斯模糊 kernel 大小
+    ksize: 算子大小
+    """
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     img = cv2.GaussianBlur(img, (int(args['blurSize']), int(args['blurSize'])), 0)
     Laplacian = cv2.convertScaleAbs(cv2.Laplacian(img, cv2.CV_16S, ksize=int(args['ksize'])))
@@ -34,6 +45,10 @@ def laplacian(imgs, args):
 
 
 def LoG(imgs, args):
+    """
+    LoG 边缘算子
+    blurSize: 高斯模糊 kernel 大小
+    """
     bsize = int(args['blurSize'])
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2RGB)
     img = cv2.copyMakeBorder(img, 2, 2, 2, 2, borderType=cv2.BORDER_REPLICATE)
@@ -47,6 +62,11 @@ def LoG(imgs, args):
 
 
 def canny(imgs, args):
+    """
+    Canny 边缘检测
+    blurSize: 高斯模糊 kernel 大小
+    threshold1, threshold2: 低, 高阈值
+    """
     bsize = int(args['blurSize'])
     blur = cv2.GaussianBlur(imgs[0], (bsize, bsize), 0)
     blur = cv2.cvtColor(blur, cv2.COLOR_BGR2GRAY)

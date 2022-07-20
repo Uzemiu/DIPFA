@@ -21,7 +21,7 @@ def getEdges(img, bsize=3, threshold1=50, threshold2=150):
 def hough(imgs, args):
     """
     霍夫变换
-    blurSize: 高斯噪声 kernel 大小
+    blurSize: 高斯模糊 kernel 大小
     cannyThreshold1, cannyThreshold2: canny 边缘检测阈值
     houghThreshold: hough 变换阈值
     """
@@ -50,7 +50,7 @@ def hough(imgs, args):
 def houghP(imgs, args):
     """
     概率霍夫变换
-    blurSize: 高斯噪声 kernel 大小
+    blurSize: 高斯模糊 kernel 大小
     cannyThreshold1, cannyThreshold2: canny 边缘检测阈值
     houghThreshold: hough 变换阈值
     minLineLength: 可以组成一条直线的最小点数, 少于这个点数的直线被忽略。
