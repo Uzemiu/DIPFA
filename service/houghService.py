@@ -18,7 +18,7 @@ def getEdges(img, bsize=3, threshold1=50, threshold2=150):
     return edges
 
 
-def hough(img, args):
+def hough(imgs, args):
     """
     霍夫变换
     blurSize: 高斯噪声 kernel 大小
@@ -26,11 +26,11 @@ def hough(img, args):
     houghThreshold: hough 变换阈值
     """
     bsize = int(args['blurSize'])
-    edges = getEdges(img, bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
+    edges = getEdges(imgs[0], bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
 
     lines = cv2.HoughLines(edges, rho=1, theta=np.pi / 2, threshold=args['houghThreshold'])
 
-    result = img.copy()
+    result = imgs[0].copy()
     for i_line in lines:
         for line in i_line:
             rho = line[0]
@@ -47,7 +47,7 @@ def hough(img, args):
     return result
 
 
-def houghP(img, args):
+def houghP(imgs, args):
     """
     概率霍夫变换
     blurSize: 高斯噪声 kernel 大小
@@ -57,12 +57,12 @@ def houghP(img, args):
     maxLineGap: 认为在同一直线上的两点之间的最大间隙。
     """
     bsize = int(args['blurSize'])
-    edges = getEdges(img, bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
+    edges = getEdges(imgs[0], bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
 
     linesP = cv2.HoughLinesP(edges, rho=1, theta=np.pi / 180, threshold=args['houghPThreshold'],
                              minLineLength=args['minLineLength'], maxLineGap=args['maxLineGap'])
 
-    result_P = img.copy()
+    result_P = imgs[0].copy()
     for i_P in linesP:
         for x1, y1, x2, y2 in i_P:
             cv2.line(result_P, (x1, y1), (x2, y2), (0, 0, 255))

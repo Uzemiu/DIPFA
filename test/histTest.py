@@ -8,10 +8,9 @@ import cv2
 import service.histService as histService
 
 img = cv2.imread('./img.jpg')
-args = None
 
 
 def test_histCover():
-    histogram = histService.histCover(img, args)
+    histogram = histService.histCover([img])
     cv2.imshow('hist', histogram)
     cv2.waitKey(0)

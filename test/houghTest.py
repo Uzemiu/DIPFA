@@ -20,12 +20,12 @@ args = {
 
 
 def test_hough():
-    res = houghService.hough(img, args)
+    res = houghService.hough([img], args)
     cv2.imshow('hough', res)
     cv2.waitKey(0)
 
 
 def test_houghP():
-    res = houghService.houghP(img, args)
+    res = houghService.houghP([img], args)
     cv2.imshow('houghP', res)
     cv2.waitKey(0)

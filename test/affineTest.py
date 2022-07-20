@@ -17,6 +17,6 @@ args = {
 
 
 def test_Affine():
-    res = affineService.affine(img, args)
-    cv2.imshow('res', res)
+    res = affineService.affine([img], args)
+    cv2.imshow('affine', res)
     cv2.waitKey(0)
