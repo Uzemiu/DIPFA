@@ -10,6 +10,7 @@ import transfer
 import service.computeService as compute_service
 import service.edgeDetectionService as edge_detection_service
 import service.noiseBlurService as noise_blur_service
+import service.augmentService as augment_service
 
 from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS, cross_origin
@@ -59,6 +60,8 @@ command_map = {
     'gaussianNoise': noise_blur_service.gaussian_noise,
     # 均值/排序统计滤波
     'avgBlur': noise_blur_service.avg_blur,
+    'maxBlur': noise_blur_service.max_blur,
+    'minBlur': noise_blur_service.min_blur,
     'medBlur': noise_blur_service.med_blur,
     'gaussianBlur': noise_blur_service.gaussian_blur,
     'geometricBlur': noise_blur_service.geometric_blur,
@@ -68,6 +71,18 @@ command_map = {
     'highPass': noise_blur_service.high_pass_filter,
     'bandPass': noise_blur_service.band_pass_filter,
     'bandStop': noise_blur_service.band_stop_filter,
+    # 图像增强
+    'lpFilter': augment_service.lp_filter,
+    'blpFilter': augment_service.butterworth_lp_filter,
+    'glpFilter': augment_service.gauss_lp_filter,
+    'hpFilter': augment_service.hp_filter,
+    'bhpFilter': augment_service.butterworth_hp_filter,
+    'ghpFilter': augment_service.gauss_hp_filter,
+    'robertsGrad': augment_service.roberts_grad,
+    'sobelGrad': augment_service.sobel_grad,
+    'prewittGrad': augment_service.prewitt_grad,
+    'laplacianGrad': augment_service.laplacian_grad,
+
     # 风格迁移
     'transfer': style_transfer,
 }

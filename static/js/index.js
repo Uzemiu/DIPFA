@@ -10,9 +10,6 @@
   );
 })();
 
-Object.assign(window, {
-  'COMMAND_ADD': 'add'
-})
 
 const app = new Vue({
   el: '#app',
@@ -22,6 +19,7 @@ const app = new Vue({
     resultImage: null,
     images: [],
     inCrop: false,
+    loading: false,
     command: '',
     // cropper
     cropper:{
@@ -37,7 +35,8 @@ const app = new Vue({
       '边缘检测',
       '图像增强',
       '形态学操作',
-      '噪声滤波'
+      '噪声滤波',
+      '其他'
     ],
     currentCollapseName: '',
     selectedAsideMenu: 0,
@@ -67,6 +66,11 @@ const app = new Vue({
       yArg: 0,
       deg: 0
     },
+    flipOp: [
+      ['flipHor', '水平翻转'],
+      ['flipVer', '垂直翻转']
+    ],
+    // 边缘检测
     edgeOp: [
       ['roberts', 'Roberts'],
       ['sobel', 'Sobel'],
@@ -80,6 +84,7 @@ const app = new Vue({
       threshold1: 50,
       threshold2: 150
     },
+    // 噪声
     noiseOp: [
       ['spNoise', '椒盐噪声'],
       ['gaussianNoise', '高斯噪声'],
@@ -90,8 +95,11 @@ const app = new Vue({
       mean: 0,
       sigma: 25
     },
+    // 滤波01
     blurOp: [
+      ['maxBlur', '最大值滤波'],
       ['avgBlur', '均值滤波'],
+      ['minBlur', '最小值滤波'],
       ['medBlur', '中值滤波'],
       ['gaussianBlur', '高斯滤波'],
       ['geometricBlur', '几何均值滤波'],
@@ -102,6 +110,7 @@ const app = new Vue({
       y: 3,
       ksize: 3
     },
+    // 滤波02
     selectiveOp: [
       ['lowPass', '低通滤波'],
       ['highPass', '高通滤波'],
@@ -111,7 +120,38 @@ const app = new Vue({
     selectiveArgs: {
       threshold1: 0,
       threshold2: 255
-    }
+    },
+    // 形态学操作
+    morphOp: [
+      ['morphOpen', '开操作'],
+      ['morphClose', '闭操作'],
+      ['morphErode', '腐蚀'],
+      ['morphDilation', '膨胀'],
+    ],
+    morphArgs: {
+      ssize: 5,
+      structure: 0
+    },
+    // 频域的平滑/频域的锐化
+    filterOp1: [
+      ['lpFilter', '理想低通滤波'],
+      ['hpFilter', '理想高通滤波'],
+      ['blpFilter', '巴特沃兹低通滤波'],
+      ['bhpFilter', '巴特沃兹高通滤波'],
+      ['glpFilter', '高斯低通滤波'],
+      ['ghpFilter', '高斯高通滤波'],
+    ],
+    filterArgs1: {
+      d0: 50,
+      n: 2
+    },
+    // 空域的平滑
+    filterOp2: [
+      ['robertsGrad', 'Roberts算子'],
+      ['sobelGrad', 'Sobel算子'],
+      ['prewittGrad', 'Prewitt算子'],
+      ['laplacianGrad', 'Laplacian算子'],
+    ],
   },
   methods: {
     selectAsideCollapse(index){
@@ -162,8 +202,14 @@ const app = new Vue({
         this.cancelCrop();
         return;
       }
+      // cancel request
+      this.controller.abort();
     },
     confirmAction(args){
+      if(this.loading){
+        this.$message.warning('正在进行其他处理操作')
+        return;
+      }
       if(this.inCrop){
         this.endCrop();
         return;
@@ -208,6 +254,9 @@ const app = new Vue({
         });
       }
 
+      this.loading = true;
+      this.controller = new AbortController();
+
       const param = new FormData();
       base64Images.forEach((img,i) => {
         param.append('files', dataURLtoBlob(img),new Date().getTime() + '' + i);
@@ -215,13 +264,19 @@ const app = new Vue({
       param.append('command', command);
       param.append('args', JSON.stringify(args));
       return axios.post('/process', param, {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        signal: this.controller.signal
       }).then(data => {
         this.resultImage = 'data:image/jpeg;base64,' + data.data;
         this.dialogVisible = true;
       }).catch(e => {
-        const msg = e.response.data.message;
-        this.$message.error(msg);
+        console.error(e);
+        if(e.response){
+          const msg = e.response.data.message;
+          this.$message.error(msg);
+        }
+      }).finally(() => {
+        this.loading = false;
       });
     },
     uploadImage(file, onload){
