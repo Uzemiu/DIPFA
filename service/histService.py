@@ -10,13 +10,13 @@ import matplotlib.pyplot as plt
 from utils import figure2ndarray
 
 
-def histCover(img, args):
+def histCover(imgs, args=None):
     """
     获取 img 的直方图
     返回一张有三条折线的直方图
     """
     color = ['r', 'g', 'b']
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2RGB)
 
     fig = plt.figure()
     for index, c in enumerate(color):

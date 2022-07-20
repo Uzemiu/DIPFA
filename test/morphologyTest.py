@@ -15,24 +15,24 @@ args = {
 
 
 def test_erode():
-    res = morphologyService.erode(img, args)
+    res = morphologyService.erode([img], args)
     cv2.imshow('erode', res)
     cv2.waitKey(0)
 
 
 def test_dilate():
-    res = morphologyService.dilate(img, args)
+    res = morphologyService.dilate([img], args)
     cv2.imshow('dilate', res)
     cv2.waitKey(0)
 
 
 def test_morphOpen():
-    res = morphologyService.morphOpen(img, args)
+    res = morphologyService.morphOpen([img], args)
     cv2.imshow('open', res)
     cv2.waitKey(0)
 
 
 def test_morphClose():
-    res = morphologyService.morphClose(img, args)
+    res = morphologyService.morphClose([img], args)
     cv2.imshow('close', res)
     cv2.waitKey(0)
