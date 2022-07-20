@@ -6,6 +6,7 @@
 """
 import cv2
 import service.houghService as houghService
+from main import display
 
 img = cv2.imread('./hough.png')
 args = {
@@ -20,12 +21,10 @@ args = {
 
 
 def test_hough():
-    res = houghService.hough(img, args)
-    cv2.imshow('hough', res)
-    cv2.waitKey(0)
+    res = houghService.hough([img], args)
+    display('hough', res)
 
 
 def test_houghP():
-    res = houghService.houghP(img, args)
-    cv2.imshow('houghP', res)
-    cv2.waitKey(0)
+    res = houghService.houghP([img], args)
+    display('houghP', res)

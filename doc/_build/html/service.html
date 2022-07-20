@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>service package &mdash; DIPFA  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DIPFA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">service package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-service.affineService">service.affineService module</a></li>
+<li><a class="reference internal" href="#module-service.augmentService">service.augmentService module</a></li>
+<li><a class="reference internal" href="#module-service.colorSpaceService">service.colorSpaceService module</a></li>
+<li><a class="reference internal" href="#module-service.computeService">service.computeService module</a></li>
+<li><a class="reference internal" href="#module-service.edgeDetectionService">service.edgeDetectionService module</a></li>
+<li><a class="reference internal" href="#module-service.flipService">service.flipService module</a></li>
+<li><a class="reference internal" href="#module-service.histService">service.histService module</a></li>
+<li><a class="reference internal" href="#module-service.houghService">service.houghService module</a></li>
+<li><a class="reference internal" href="#module-service.morphologyService">service.morphologyService module</a></li>
+<li><a class="reference internal" href="#module-service.noiseBlurService">service.noiseBlurService module</a></li>
+<li><a class="reference internal" href="#module-service">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DIPFA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>service package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/service.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="service-package">
+<h1>service package<a class="headerlink" href="#service-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-service.affineService">
+<span id="service-affineservice-module"></span><h2>service.affineService module<a class="headerlink" href="#module-service.affineService" title="Permalink to this heading"></a></h2>
+<p>&#64;File : affineService.py 
+&#64;Author: csc
+&#64;Date : 2022/7/19
+仿射变换</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.affineService.affine">
+<span class="sig-prename descclassname"><span class="pre">service.affineService.</span></span><span class="sig-name descname"><span class="pre">affine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.affineService.affine" title="Permalink to this definition"></a></dt>
+<dd><p>仿射变换
+post1: Array&lt;Tuple&lt;float, float&gt;&gt; | [[x1, y1], [x2, y2], [x3, y3]]  三个点
+post2: Array&lt;Tuple&lt;float, float&gt;&gt; | [[x1, y1], [x2, y2], [x3, y3]]  三个点
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service.augmentService">
+<span id="service-augmentservice-module"></span><h2>service.augmentService module<a class="headerlink" href="#module-service.augmentService" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.butterworth_hp_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">butterworth_hp_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.butterworth_hp_filter" title="Permalink to this definition"></a></dt>
+<dd><p>巴特沃斯高通滤波
+d0: int | 截止频率
+n: int | 阶数
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.butterworth_lp_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">butterworth_lp_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.butterworth_lp_filter" title="Permalink to this definition"></a></dt>
+<dd><p>巴特沃斯低通滤波
+d0: int | 截止频率
+n: int | 阶数
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.frequency_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">frequency_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filtered</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.frequency_filter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.gauss_hp_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">gauss_hp_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.gauss_hp_filter" title="Permalink to this definition"></a></dt>
+<dd><p>高斯高通滤波
+d0: int | 截止频率
+n: int | 阶数
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.gauss_lp_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">gauss_lp_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.gauss_lp_filter" title="Permalink to this definition"></a></dt>
+<dd><p>高斯低通滤波
+d0: int | 截止频率
+n: int | 阶数
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.hp_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">hp_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.hp_filter" title="Permalink to this definition"></a></dt>
+<dd><p>理想高通滤波
+d0: int | 截止频率
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.laplacian_grad">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">laplacian_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.laplacian_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Laplacian梯度算子</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.lp_filter">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">lp_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.lp_filter" title="Permalink to this definition"></a></dt>
+<dd><p>理想低通滤波
+d0: int | 截止频率
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.prewitt_grad">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">prewitt_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.prewitt_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Prewitt梯度算子</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.roberts_grad">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">roberts_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.roberts_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Roberts 梯度算子
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.augmentService.sobel_grad">
+<span class="sig-prename descclassname"><span class="pre">service.augmentService.</span></span><span class="sig-name descname"><span class="pre">sobel_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.augmentService.sobel_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Sobel 梯度算子</p>
+</dd></dl>
+
+</section>
+<section id="module-service.colorSpaceService">
+<span id="service-colorspaceservice-module"></span><h2>service.colorSpaceService module<a class="headerlink" href="#module-service.colorSpaceService" title="Permalink to this heading"></a></h2>
+<p>&#64;File : colorSpaceService.py
+&#64;Author: csc
+&#64;Date : 2022/6/22
+色彩空间</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.colorSpaceService.getHSV">
+<span class="sig-prename descclassname"><span class="pre">service.colorSpaceService.</span></span><span class="sig-name descname"><span class="pre">getHSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#service.colorSpaceService.getHSV" title="Permalink to this definition"></a></dt>
+<dd><p>返回 HSV 三个通道对应的彩色图
+:return: Tuple&lt;img, img, img&gt;</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.colorSpaceService.getRGB">
+<span class="sig-prename descclassname"><span class="pre">service.colorSpaceService.</span></span><span class="sig-name descname"><span class="pre">getRGB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#service.colorSpaceService.getRGB" title="Permalink to this definition"></a></dt>
+<dd><p>返回 RGB 三个通道对应的彩色图
+:return: Tuple&lt;img, img, img&gt;</p>
+</dd></dl>
+
+</section>
+<section id="module-service.computeService">
+<span id="service-computeservice-module"></span><h2>service.computeService module<a class="headerlink" href="#module-service.computeService" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.add">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.add" title="Permalink to this definition"></a></dt>
+<dd><p>加法运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.andOp">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">andOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.andOp" title="Permalink to this definition"></a></dt>
+<dd><p>与运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.divide">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">divide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.divide" title="Permalink to this definition"></a></dt>
+<dd><p>除法运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.multiply">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.multiply" title="Permalink to this definition"></a></dt>
+<dd><p>乘法运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.notOp">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">notOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.notOp" title="Permalink to this definition"></a></dt>
+<dd><p>非运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.orOp">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">orOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.orOp" title="Permalink to this definition"></a></dt>
+<dd><p>或运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.rotate">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.rotate" title="Permalink to this definition"></a></dt>
+<dd><p>旋转
+x, y: int, int | 旋转中心
+deg: float | 旋转角度
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.scale">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.scale" title="Permalink to this definition"></a></dt>
+<dd><p>缩放
+dstX, dstY: int, int | 目标大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.subtract">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">subtract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.subtract" title="Permalink to this definition"></a></dt>
+<dd><p>减法运算
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.computeService.translate">
+<span class="sig-prename descclassname"><span class="pre">service.computeService.</span></span><span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.computeService.translate" title="Permalink to this definition"></a></dt>
+<dd><p>平移
+xArg, yArg: float, float | x, y 方向上的平移距离
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service.edgeDetectionService">
+<span id="service-edgedetectionservice-module"></span><h2>service.edgeDetectionService module<a class="headerlink" href="#module-service.edgeDetectionService" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.edgeDetectionService.LoG">
+<span class="sig-prename descclassname"><span class="pre">service.edgeDetectionService.</span></span><span class="sig-name descname"><span class="pre">LoG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.edgeDetectionService.LoG" title="Permalink to this definition"></a></dt>
+<dd><p>LoG 边缘算子
+blurSize: int | 高斯模糊 kernel 大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.edgeDetectionService.canny">
+<span class="sig-prename descclassname"><span class="pre">service.edgeDetectionService.</span></span><span class="sig-name descname"><span class="pre">canny</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.edgeDetectionService.canny" title="Permalink to this definition"></a></dt>
+<dd><p>Canny 边缘检测
+blurSize: int | 高斯模糊 kernel 大小
+threshold1, threshold2: int, int | 低, 高阈值
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.edgeDetectionService.laplacian">
+<span class="sig-prename descclassname"><span class="pre">service.edgeDetectionService.</span></span><span class="sig-name descname"><span class="pre">laplacian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.edgeDetectionService.laplacian" title="Permalink to this definition"></a></dt>
+<dd><p>Laplacian 算子
+blurSize: int | 高斯模糊 kernel 大小
+ksize: int | 算子大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.edgeDetectionService.roberts">
+<span class="sig-prename descclassname"><span class="pre">service.edgeDetectionService.</span></span><span class="sig-name descname"><span class="pre">roberts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.edgeDetectionService.roberts" title="Permalink to this definition"></a></dt>
+<dd><p>Roberts 算子
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.edgeDetectionService.sobel">
+<span class="sig-prename descclassname"><span class="pre">service.edgeDetectionService.</span></span><span class="sig-name descname"><span class="pre">sobel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.edgeDetectionService.sobel" title="Permalink to this definition"></a></dt>
+<dd><p>Sobel 算子
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service.flipService">
+<span id="service-flipservice-module"></span><h2>service.flipService module<a class="headerlink" href="#module-service.flipService" title="Permalink to this heading"></a></h2>
+<p>&#64;File : flipService.py 
+&#64;Author: csc
+&#64;Date : 2022/7/17
+图像翻转</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.flipService.horizontalFlip">
+<span class="sig-prename descclassname"><span class="pre">service.flipService.</span></span><span class="sig-name descname"><span class="pre">horizontalFlip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.flipService.horizontalFlip" title="Permalink to this definition"></a></dt>
+<dd><p>水平翻转图像
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.flipService.verticalFlip">
+<span class="sig-prename descclassname"><span class="pre">service.flipService.</span></span><span class="sig-name descname"><span class="pre">verticalFlip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.flipService.verticalFlip" title="Permalink to this definition"></a></dt>
+<dd><p>垂直翻转图像
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service.histService">
+<span id="service-histservice-module"></span><h2>service.histService module<a class="headerlink" href="#module-service.histService" title="Permalink to this heading"></a></h2>
+<p>&#64;File : histService.py 
+&#64;Author: csc
+&#64;Date : 2022/7/18
+直方图</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.histService.histCover">
+<span class="sig-prename descclassname"><span class="pre">service.histService.</span></span><span class="sig-name descname"><span class="pre">histCover</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.histService.histCover" title="Permalink to this definition"></a></dt>
+<dd><p>获取 img 的直方图
+返回一张有三条折线的直方图
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service.houghService">
+<span id="service-houghservice-module"></span><h2>service.houghService module<a class="headerlink" href="#module-service.houghService" title="Permalink to this heading"></a></h2>
+<p>&#64;File : houghService.py 
+&#64;Author: csc
+&#64;Date : 2022/7/19
+霍夫变换</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.houghService.getEdges">
+<span class="sig-prename descclassname"><span class="pre">service.houghService.</span></span><span class="sig-name descname"><span class="pre">getEdges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">150</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.houghService.getEdges" title="Permalink to this definition"></a></dt>
+<dd><p>获取图像边缘</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.houghService.hough">
+<span class="sig-prename descclassname"><span class="pre">service.houghService.</span></span><span class="sig-name descname"><span class="pre">hough</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.houghService.hough" title="Permalink to this definition"></a></dt>
+<dd><p>霍夫变换
+blurSize: int | 高斯模糊 kernel 大小
+cannyThreshold1, cannyThreshold2: int, int | canny 边缘检测阈值
+houghThreshold: int | hough 变换阈值
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.houghService.houghP">
+<span class="sig-prename descclassname"><span class="pre">service.houghService.</span></span><span class="sig-name descname"><span class="pre">houghP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.houghService.houghP" title="Permalink to this definition"></a></dt>
+<dd><p>概率霍夫变换
+blurSize: int | 高斯模糊 kernel 大小
+cannyThreshold1, cannyThreshold2: int, int | canny 边缘检测阈值
+houghThreshold: int | hough 变换阈值
+minLineLength: int | (最小长度)可以组成一条直线的最小点数, 少于这个点数的直线被忽略
+maxLineGap: int | (最大间隙)认为在同一直线上的两点之间的最大间隙
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service.morphologyService">
+<span id="service-morphologyservice-module"></span><h2>service.morphologyService module<a class="headerlink" href="#module-service.morphologyService" title="Permalink to this heading"></a></h2>
+<p>&#64;File : morphologyService.py 
+&#64;Author: csc
+&#64;Date : 2022/7/19
+形态学操作</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.morphologyService.dilate">
+<span class="sig-prename descclassname"><span class="pre">service.morphologyService.</span></span><span class="sig-name descname"><span class="pre">dilate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.morphologyService.dilate" title="Permalink to this definition"></a></dt>
+<dd><p>膨胀: 将与物体接触的所有背景点合并到物体中，使目标增大，可添补目标中的空洞
+kernelType: int | 结构元类型 0: MORPH_RECT, 1: MORPH_CROSS, 2: MORPH_ELLIPSE
+kernelSize: Tuple&lt;int, int&gt; | (x, y) 结构元大小</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.morphologyService.erode">
+<span class="sig-prename descclassname"><span class="pre">service.morphologyService.</span></span><span class="sig-name descname"><span class="pre">erode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.morphologyService.erode" title="Permalink to this definition"></a></dt>
+<dd><p>腐蚀: 消除物体边界点，使目标缩小，可以消除小于结构元素的噪声点
+kernelType: int | 结构元类型 0: MORPH_RECT, 1: MORPH_CROSS, 2: MORPH_ELLIPSE
+kernelX, kernelY: int, int | (x, y) 结构元大小</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.morphologyService.morphClose">
+<span class="sig-prename descclassname"><span class="pre">service.morphologyService.</span></span><span class="sig-name descname"><span class="pre">morphClose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.morphologyService.morphClose" title="Permalink to this definition"></a></dt>
+<dd><p>闭运算: 先膨胀后腐蚀，填充物体内细小的空洞，并平滑物体边界
+kernelType: int | 结构元类型 0: MORPH_RECT, 1: MORPH_CROSS, 2: MORPH_ELLIPSE
+kernelSize: Tuple&lt;int, int&gt; | (x, y) 结构元大小</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.morphologyService.morphOpen">
+<span class="sig-prename descclassname"><span class="pre">service.morphologyService.</span></span><span class="sig-name descname"><span class="pre">morphOpen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.morphologyService.morphOpen" title="Permalink to this definition"></a></dt>
+<dd><p>开运算: 先腐蚀后膨胀，消除图像上细小的噪声，并平滑物体边界
+kernelType: int | 结构元类型 0: MORPH_RECT, 1: MORPH_CROSS, 2: MORPH_ELLIPSE
+kernelSize: Tuple&lt;int, int&gt; | (x, y) 结构元大小</p>
+</dd></dl>
+
+</section>
+<section id="module-service.noiseBlurService">
+<span id="service-noiseblurservice-module"></span><h2>service.noiseBlurService module<a class="headerlink" href="#module-service.noiseBlurService" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.avg_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">avg_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.avg_blur" title="Permalink to this definition"></a></dt>
+<dd><p>算术均值滤波
+x, y: int, int | 滤波器大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.band_pass_filter">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">band_pass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.band_pass_filter" title="Permalink to this definition"></a></dt>
+<dd><p>带通滤波
+threshold1, threshold2: int, int | 低阈值, 高阈值
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.band_stop_filter">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">band_stop_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.band_stop_filter" title="Permalink to this definition"></a></dt>
+<dd><p>带阻滤波
+threshold1, threshold2: int, int | 低阈值, 高阈值
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.gaussian_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">gaussian_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.gaussian_blur" title="Permalink to this definition"></a></dt>
+<dd><p>高斯滤波
+x, y: int, int | 滤波器大小</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.gaussian_noise">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">gaussian_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.gaussian_noise" title="Permalink to this definition"></a></dt>
+<dd><p>添加高斯噪声
+mean: float | 均值
+sigma: float | 标准差
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.geometric_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">geometric_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.geometric_blur" title="Permalink to this definition"></a></dt>
+<dd><p>几何均值滤波
+ksize: int | 滤波器大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.harmonic_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">harmonic_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.harmonic_blur" title="Permalink to this definition"></a></dt>
+<dd><p>谐波均值滤波
+ksize: int | 滤波器大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.high_pass_filter">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">high_pass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.high_pass_filter" title="Permalink to this definition"></a></dt>
+<dd><p>高通滤波
+threshold1: int | 阈值
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.low_pass_filter">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">low_pass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.low_pass_filter" title="Permalink to this definition"></a></dt>
+<dd><p>低通滤波
+threshold2: int | 阈值
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.max_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">max_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.max_blur" title="Permalink to this definition"></a></dt>
+<dd><p>最大值滤波
+ksize: int | 滤波器大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.med_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">med_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.med_blur" title="Permalink to this definition"></a></dt>
+<dd><p>中值滤波
+ksize: 滤波器大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.min_blur">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">min_blur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.min_blur" title="Permalink to this definition"></a></dt>
+<dd><p>最小值滤波
+ksize: int | 滤波器大小
+:return: img</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="service.noiseBlurService.sp_noise">
+<span class="sig-prename descclassname"><span class="pre">service.noiseBlurService.</span></span><span class="sig-name descname"><span class="pre">sp_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imgs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#service.noiseBlurService.sp_noise" title="Permalink to this definition"></a></dt>
+<dd><p>添加椒盐噪声
+svp: float | 盐噪声比例 0-1之间
+amount: float | 噪声占比 0-1之间
+:return: img</p>
+</dd></dl>
+
+</section>
+<section id="module-service">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-service" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, csc &amp; wch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -15,10 +15,15 @@ def frequency_filter(image, filtered):
     return np.uint8(handle_fftImgShift4)
 
 
+# 低通滤波
 def lp_filter(imgs, args):
+    """
+    理想低通滤波
+    d0: int | 截止频率
+    :return: img
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
-    n = int(args['n'])
     H = np.empty_like(image, dtype=float)
     M, N = image.shape
     mid_x = int(M / 2)
@@ -32,6 +37,12 @@ def lp_filter(imgs, args):
 
 
 def butterworth_lp_filter(imgs, args):
+    """
+    巴特沃斯低通滤波
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
     n = int(args['n'])
@@ -42,11 +53,17 @@ def butterworth_lp_filter(imgs, args):
     for x in range(0, M):
         for y in range(0, N):
             d = np.sqrt((y - mid_x) ** 2 + (x - mid_y) ** 2)
-            H[x, y] = 1 / (1 + (d / d0) ** n)
+            H[x, y] = 1 / (1 + (d / d0) ** (2 * n))
     return frequency_filter(image, H)
 
 
 def gauss_lp_filter(imgs, args):
+    """
+    高斯低通滤波
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
     n = int(args['n'])
@@ -61,10 +78,15 @@ def gauss_lp_filter(imgs, args):
     return frequency_filter(image, H)
 
 
+# 高通滤波
 def hp_filter(imgs, args):
+    """
+    理想高通滤波
+    d0: int | 截止频率
+    :return: img
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
-    n = int(args['n'])
     H = np.empty_like(image, dtype=float)
     M, N = image.shape
     mid_x = int(M / 2)
@@ -78,6 +100,12 @@ def hp_filter(imgs, args):
 
 
 def butterworth_hp_filter(imgs, args):
+    """
+    巴特沃斯高通滤波
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
     n = int(args['n'])
@@ -93,6 +121,12 @@ def butterworth_hp_filter(imgs, args):
 
 
 def gauss_hp_filter(imgs, args):
+    """
+    高斯高通滤波
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
     n = int(args['n'])
@@ -107,15 +141,25 @@ def gauss_hp_filter(imgs, args):
     return frequency_filter(image, H)
 
 
-def roberts_grad(imgs, args):
+def roberts_grad(imgs, args=None):
+    """
+    Roberts 梯度算子
+    :return: img
+    """
     return service.edgeDetectionService.roberts(imgs, args)
 
 
-def sobel_grad(imgs, args):
+def sobel_grad(imgs, args=None):
+    """
+    Sobel 梯度算子
+    """
     return service.edgeDetectionService.sobel(imgs, args)
 
 
-def prewitt_grad(imgs, args):
+def prewitt_grad(imgs, args=None):
+    """
+    Prewitt梯度算子
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     preX = np.array([[1, 0, -1], [1, 0, -1], [1, 0, -1]])
     preY = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])
@@ -127,7 +171,10 @@ def prewitt_grad(imgs, args):
     return cv2.addWeighted(absX, 0.5, absY, 0.5, 0)
 
 
-def laplacian_grad(imgs, args):
+def laplacian_grad(imgs, args=None):
+    """
+    Laplacian梯度算子
+    """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     lap = np.array([[0, -1, 0], [-1, 4, -1], [0, -1, 0]])
     return cv2.filter2D(image, ddepth=-1, kernel=lap)
