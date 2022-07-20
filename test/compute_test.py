@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 
 from service.computeService import *
+from main import display
 
 
 img = cv2.imread('./img.jpg')
@@ -51,18 +52,15 @@ def test_divide():
 def test_scale():
     height, width, channel = img.shape
     res = scale([img], {'dstX': width / 2, 'dstY': height / 2})
-    cv2.imshow('scale', res)
-    cv2.waitKey(0)
+    display('scale', res)
 
 
 def test_translate():
     res = translate([img], {'xArg': 10, 'yArg': 10})
-    cv2.imshow('translate', res)
-    cv2.waitKey(0)
+    display('translate', res)
 
 
 def test_rotate():
     height, width, channel = img.shape
     res = rotate([img], {'x': height / 2, 'y': width / 2, 'deg': 90})
-    cv2.imshow('rotate', res)
-    cv2.waitKey(0)
+    display('rotate', res)

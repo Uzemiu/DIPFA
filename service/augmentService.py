@@ -19,7 +19,8 @@ def frequency_filter(image, filtered):
 def lp_filter(imgs, args):
     """
     理想低通滤波
-    d0: 截止频率
+    d0: int | 截止频率
+    :return: img
     """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
@@ -38,8 +39,9 @@ def lp_filter(imgs, args):
 def butterworth_lp_filter(imgs, args):
     """
     巴特沃斯低通滤波
-    d0: 截止频率
-    n: 阶数
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
     """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
@@ -58,8 +60,9 @@ def butterworth_lp_filter(imgs, args):
 def gauss_lp_filter(imgs, args):
     """
     高斯低通滤波
-    d0: 截止频率
-    n: 阶数
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
     """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
@@ -79,7 +82,8 @@ def gauss_lp_filter(imgs, args):
 def hp_filter(imgs, args):
     """
     理想高通滤波
-    d0: 截止频率
+    d0: int | 截止频率
+    :return: img
     """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
@@ -98,8 +102,9 @@ def hp_filter(imgs, args):
 def butterworth_hp_filter(imgs, args):
     """
     巴特沃斯高通滤波
-    d0: 截止频率
-    n: 阶数
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
     """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
@@ -118,8 +123,9 @@ def butterworth_hp_filter(imgs, args):
 def gauss_hp_filter(imgs, args):
     """
     高斯高通滤波
-    d0: 截止频率
-    n: 阶数
+    d0: int | 截止频率
+    n: int | 阶数
+    :return: img
     """
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     d0 = int(args['d0'])
@@ -138,6 +144,7 @@ def gauss_hp_filter(imgs, args):
 def roberts_grad(imgs, args=None):
     """
     Roberts 梯度算子
+    :return: img
     """
     return service.edgeDetectionService.roberts(imgs, args)
 

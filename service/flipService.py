@@ -14,6 +14,7 @@ VERTICAL = 0
 def horizontalFlip(imgs, args=None):
     """
     水平翻转图像
+    :return: img
     """
     return cv2.flip(imgs[0], HORIZONTAL)
 
@@ -21,5 +22,6 @@ def horizontalFlip(imgs, args=None):
 def verticalFlip(imgs, args=None):
     """
     垂直翻转图像
+    :return: img
     """
     return cv2.flip(imgs[0], VERTICAL)

@@ -6,11 +6,11 @@
 """
 import cv2
 import service.histService as histService
+from main import display
 
 img = cv2.imread('./img.jpg')
 
 
 def test_histCover():
     histogram = histService.histCover([img])
-    cv2.imshow('hist', histogram)
-    cv2.waitKey(0)
+    display('hist', histogram)

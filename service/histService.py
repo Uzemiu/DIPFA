@@ -14,6 +14,7 @@ def histCover(imgs, args=None):
     """
     获取 img 的直方图
     返回一张有三条折线的直方图
+    :return: img
     """
     color = ['r', 'g', 'b']
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2RGB)

@@ -5,6 +5,7 @@ import numpy as np
 def roberts(imgs, args=None):
     """
     Roberts 算子
+    :return: img
     """
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     kernelx = np.array([[-1, 0], [0, 1]], dtype=int)
@@ -22,6 +23,7 @@ def roberts(imgs, args=None):
 def sobel(imgs, args=None):
     """
     Sobel 算子
+    :return: img
     """
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     x = cv2.Sobel(img, cv2.CV_16S, 1, 0)
@@ -35,8 +37,9 @@ def sobel(imgs, args=None):
 def laplacian(imgs, args):
     """
     Laplacian 算子
-    blurSize: 高斯模糊 kernel 大小
-    ksize: 算子大小
+    blurSize: int | 高斯模糊 kernel 大小
+    ksize: int | 算子大小
+    :return: img
     """
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
     img = cv2.GaussianBlur(img, (int(args['blurSize']), int(args['blurSize'])), 0)
@@ -47,7 +50,8 @@ def laplacian(imgs, args):
 def LoG(imgs, args):
     """
     LoG 边缘算子
-    blurSize: 高斯模糊 kernel 大小
+    blurSize: int | 高斯模糊 kernel 大小
+    :return: img
     """
     bsize = int(args['blurSize'])
     img = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2RGB)
@@ -64,8 +68,9 @@ def LoG(imgs, args):
 def canny(imgs, args):
     """
     Canny 边缘检测
-    blurSize: 高斯模糊 kernel 大小
-    threshold1, threshold2: 低, 高阈值
+    blurSize: int | 高斯模糊 kernel 大小
+    threshold1, threshold2: int, int | 低, 高阈值
+    :return: img
     """
     bsize = int(args['blurSize'])
     blur = cv2.GaussianBlur(imgs[0], (bsize, bsize), 0)

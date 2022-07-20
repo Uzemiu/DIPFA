@@ -12,6 +12,7 @@ import numpy as np
 def getRGB(imgs, args=None) -> tuple:
     """
     返回 RGB 三个通道对应的彩色图
+    :return: Tuple<img, img, img>
     """
     b, g, r = cv2.split(imgs[0])
     zeros = np.zeros(imgs[0].shape[:2], dtype="uint8")
@@ -21,6 +22,7 @@ def getRGB(imgs, args=None) -> tuple:
 def getHSV(imgs, args=None) -> tuple:
     """
     返回 HSV 三个通道对应的彩色图
+    :return: Tuple<img, img, img>
     """
     hsv = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2HSV)
     h, s, v = cv2.split(hsv)

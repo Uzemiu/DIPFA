@@ -5,8 +5,9 @@ import numpy as np
 def sp_noise(imgs, args):
     """
     添加椒盐噪声
-    svp: 盐噪声比例
-    amount: 噪声占比
+    svp: float | 盐噪声比例 0-1之间
+    amount: float | 噪声占比 0-1之间
+    :return: img
     """
     image = imgs[0]
     s_vs_p = float(args['svp'])
@@ -29,14 +30,15 @@ def sp_noise(imgs, args):
 def gaussian_noise(imgs, args):
     """
     添加高斯噪声
-    mean: 均值
-    sigma: 标准差
+    mean: float | 均值
+    sigma: float | 标准差
+    :return: img
     """
     # TODO 有问题
     image = imgs[0] / 255.0
     h, w, c = image.shape
-    mean = int(args['mean'])
-    sigma = int(args['sigma'])
+    mean = float(args['mean'])
+    sigma = float(args['sigma'])
     gauss = np.random.normal(mean, sigma, (h, w, c))
     noisy_img = image + gauss
     return np.clip(noisy_img, a_min=0, a_max=255)
@@ -45,12 +47,18 @@ def gaussian_noise(imgs, args):
 def avg_blur(imgs, args):
     """
     算术均值滤波
-    x, y: 滤波器大小
+    x, y: int, int | 滤波器大小
+    :return: img
     """
     return cv2.blur(imgs[0], (int(args['x']), int(args['y'])))
 
 
 def max_blur(imgs, args):
+    """
+    最大值滤波
+    ksize: int | 滤波器大小
+    :return: img
+    """
     image = imgs[0]
     h, w, c = image.shape
     output = np.zeros(image.shape, np.uint8)
@@ -64,6 +72,11 @@ def max_blur(imgs, args):
 
 
 def min_blur(imgs, args):
+    """
+    最小值滤波
+    ksize: int | 滤波器大小
+    :return: img
+    """
     image = imgs[0]
     h, w, c = image.shape
     output = np.zeros(image.shape, np.uint8)
@@ -80,6 +93,7 @@ def med_blur(imgs, args):
     """
     中值滤波
     ksize: 滤波器大小
+    :return: img
     """
     return cv2.medianBlur(imgs[0], int(args['ksize']))
 
@@ -94,7 +108,8 @@ def gaussian_blur(imgs, args):
 def geometric_blur(imgs, args):
     """
     几何均值滤波
-    ksize: 滤波器大小
+    ksize: int | 滤波器大小
+    :return: img
     """
     kernel_size = int(args['ksize'])
 
@@ -122,7 +137,8 @@ def geometric_blur(imgs, args):
 def harmonic_blur(imgs, args):
     """
     谐波均值滤波
-    ksize: 滤波器大小
+    ksize: int | 滤波器大小
+    :return: img
     """
     kernel_size = int(args['ksize'])
 
@@ -158,7 +174,8 @@ def harmonic_blur(imgs, args):
 def low_pass_filter(imgs, args):
     """
     低通滤波
-    threshold2: 阈值
+    threshold2: int | 阈值
+    :return: img
     """
     threshold2 = int(args['threshold2'])
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
@@ -177,7 +194,8 @@ def low_pass_filter(imgs, args):
 def high_pass_filter(imgs, args):
     """
     高通滤波
-    threshold1: 阈值
+    threshold1: int | 阈值
+    :return: img
     """
     threshold1 = int(args['threshold1'])
     image = cv2.cvtColor(imgs[0], cv2.COLOR_BGR2GRAY)
@@ -196,7 +214,8 @@ def high_pass_filter(imgs, args):
 def band_pass_filter(imgs, args):
     """
     带通滤波
-    threshold1, threshold2: 低阈值, 高阈值
+    threshold1, threshold2: int, int | 低阈值, 高阈值
+    :return: img
     """
     threshold1 = int(args['threshold1'])
     threshold2 = int(args['threshold2'])
@@ -216,7 +235,8 @@ def band_pass_filter(imgs, args):
 def band_stop_filter(imgs, args):
     """
     带阻滤波
-    threshold1, threshold2: 低阈值, 高阈值
+    threshold1, threshold2: int, int | 低阈值, 高阈值
+    :return: img
     """
     threshold1 = int(args['threshold1'])
     threshold2 = int(args['threshold2'])

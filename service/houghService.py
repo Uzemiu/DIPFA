@@ -21,14 +21,16 @@ def getEdges(img, bsize=3, threshold1=50, threshold2=150):
 def hough(imgs, args):
     """
     霍夫变换
-    blurSize: 高斯模糊 kernel 大小
-    cannyThreshold1, cannyThreshold2: canny 边缘检测阈值
-    houghThreshold: hough 变换阈值
+    blurSize: int | 高斯模糊 kernel 大小
+    cannyThreshold1, cannyThreshold2: int, int | canny 边缘检测阈值
+    houghThreshold: int | hough 变换阈值
+    :return: img
     """
     bsize = int(args['blurSize'])
-    edges = getEdges(imgs[0], bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
+    edges = getEdges(imgs[0], bsize,
+                     threshold1=int(args['cannyThreshold1']), threshold2=int(args['cannyThreshold2']))
 
-    lines = cv2.HoughLines(edges, rho=1, theta=np.pi / 2, threshold=args['houghThreshold'])
+    lines = cv2.HoughLines(edges, rho=1, theta=np.pi / 2, threshold=int(args['houghThreshold']))
 
     result = imgs[0].copy()
     for i_line in lines:
@@ -50,17 +52,19 @@ def hough(imgs, args):
 def houghP(imgs, args):
     """
     概率霍夫变换
-    blurSize: 高斯模糊 kernel 大小
-    cannyThreshold1, cannyThreshold2: canny 边缘检测阈值
-    houghThreshold: hough 变换阈值
-    minLineLength: 可以组成一条直线的最小点数, 少于这个点数的直线被忽略。
-    maxLineGap: 认为在同一直线上的两点之间的最大间隙。
+    blurSize: int | 高斯模糊 kernel 大小
+    cannyThreshold1, cannyThreshold2: int, int | canny 边缘检测阈值
+    houghThreshold: int | hough 变换阈值
+    minLineLength: int | (最小长度)可以组成一条直线的最小点数, 少于这个点数的直线被忽略
+    maxLineGap: int | (最大间隙)认为在同一直线上的两点之间的最大间隙
+    :return: img
     """
     bsize = int(args['blurSize'])
-    edges = getEdges(imgs[0], bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
+    edges = getEdges(imgs[0], bsize,
+                     threshold1=int(args['cannyThreshold1']), threshold2=int(args['cannyThreshold2']))
 
-    linesP = cv2.HoughLinesP(edges, rho=1, theta=np.pi / 180, threshold=args['houghPThreshold'],
-                             minLineLength=args['minLineLength'], maxLineGap=args['maxLineGap'])
+    linesP = cv2.HoughLinesP(edges, rho=1, theta=np.pi / 2, threshold=int(args['houghPThreshold']),
+                             minLineLength=int(args['minLineLength']), maxLineGap=int(args['maxLineGap']))
 
     result_P = imgs[0].copy()
     for i_P in linesP:
