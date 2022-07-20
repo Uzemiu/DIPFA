@@ -16,7 +16,8 @@ const app = new Vue({
   data: {
     currentImage: null,
     secondImage: null,
-    resultImage: null,
+    resultImage: [],
+    disableReplace: false,
     images: [],
     inCrop: false,
     loading: false,
@@ -70,6 +71,13 @@ const app = new Vue({
       ['flipHor', '水平翻转'],
       ['flipVer', '垂直翻转']
     ],
+    affineOp: [
+      ['affine', '仿射变换']
+    ],
+    affineArgs: {
+      post1: [[0,0],[0,0],[0,0]],
+      post2: [[0,0],[0,0],[0,0]],
+    },
     // 边缘检测
     edgeOp: [
       ['roberts', 'Roberts'],
@@ -83,6 +91,18 @@ const app = new Vue({
       ksize: 3,
       threshold1: 50,
       threshold2: 150
+    },
+    houghOp: [
+      ['hough', '霍夫变换'],
+      ['houghP', '概率霍夫变换']
+    ],
+    houghArgs: {
+      blurSize: 3,
+      cannyThreshold1: 50,
+      cannyThreshold2: 150,
+      houghThreshold: 120,
+      minLineLength: 120,
+      maxLineGap: 15
     },
     // 噪声
     noiseOp: [
@@ -126,11 +146,11 @@ const app = new Vue({
       ['morphOpen', '开操作'],
       ['morphClose', '闭操作'],
       ['morphErode', '腐蚀'],
-      ['morphDilation', '膨胀'],
+      ['morphDilate', '膨胀'],
     ],
     morphArgs: {
-      ssize: 5,
-      structure: 0
+      kernelSize: 5,
+      kernelType: 'morph rect'
     },
     // 频域的平滑/频域的锐化
     filterOp1: [
@@ -152,6 +172,12 @@ const app = new Vue({
       ['prewittGrad', 'Prewitt算子'],
       ['laplacianGrad', 'Laplacian算子'],
     ],
+    // 其他
+    otherOp: [
+      ['hist', '直方图统计'],
+      ['getRGB', 'RGB'],
+      ['getHSV', 'HSV']
+    ]
   },
   methods: {
     selectAsideCollapse(index){
@@ -166,11 +192,11 @@ const app = new Vue({
       this.command = command;
     },
     replaceResultImage(){
-      this.images[this.currentImage] = this.resultImage;
+      this.images[this.currentImage] = this.resultImage[0];
       this.dialogVisible = false;
     },
     addResultImage(){
-      this.images.push(this.resultImage);
+      this.images.push(...this.resultImage);
       this.dialogVisible = false;
     },
     //---crop---
@@ -267,7 +293,7 @@ const app = new Vue({
         'Content-Type': 'multipart/form-data',
         signal: this.controller.signal
       }).then(data => {
-        this.resultImage = 'data:image/jpeg;base64,' + data.data;
+        this.resultImage = data.data.map(e => 'data:image/jpeg;base64,' + e);
         this.dialogVisible = true;
       }).catch(e => {
         console.error(e);
@@ -296,13 +322,10 @@ const app = new Vue({
       })
       return false;
     },
-    closeDialog(){
-
-    }
   },
   computed: {
     multiInput(){
       return this.currentCollapseName.indexOf('[mul]') >= 0 && this.command !== 'not';
-    }
+    },
   }
 });

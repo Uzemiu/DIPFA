@@ -6,11 +6,17 @@ import uuid
 import numpy as np
 import cv2 as cv
 
+import service.histService
+import service.colorSpaceService
+import service.morphologyService as morphology_service
+import service.houghService as hough_service
+import service.affineService as affine_service
 import transfer
 import service.computeService as compute_service
 import service.edgeDetectionService as edge_detection_service
 import service.noiseBlurService as noise_blur_service
 import service.augmentService as augment_service
+import service.flipService as flip_service
 
 from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS, cross_origin
@@ -48,12 +54,17 @@ command_map = {
     'scale': compute_service.scale,
     'translate': compute_service.translate,
     'rotate': compute_service.rotate,
+    'flipHor': flip_service.horizontalFlip,
+    'flipVer': flip_service.verticalFlip,
+    'affine': affine_service.affine,
     # 边缘检测
     'roberts': edge_detection_service.roberts,
     'sobel': edge_detection_service.sobel,
     'laplacian': edge_detection_service.laplacian,
     'LoG': edge_detection_service.LoG,
     'canny': edge_detection_service.canny,
+    'hough': hough_service.hough,
+    'houghP': hough_service.houghP,
     # 噪声滤波,
     # 添加噪声
     'spNoise': noise_blur_service.sp_noise,
@@ -82,7 +93,15 @@ command_map = {
     'sobelGrad': augment_service.sobel_grad,
     'prewittGrad': augment_service.prewitt_grad,
     'laplacianGrad': augment_service.laplacian_grad,
-
+    # 形态学操作
+    'morphOpen': morphology_service.morphOpen,
+    'morphClose': morphology_service.morphClose,
+    'morphErode': morphology_service.erode,
+    'morphDilate': morphology_service.dilate,
+    # 其他
+    'hist': service.histService.histCover,
+    'getRGB': service.colorSpaceService.getRGB,
+    'getHSV': service.colorSpaceService.getHSV,
     # 风格迁移
     'transfer': style_transfer,
 }
@@ -125,7 +144,13 @@ def upload():
             for d in dst:
                 imgs.append(cv.imread(d, 1))
             resp_data = do_command(imgs, args)
-            resp_data = base64_encode(resp_data)
+            if isinstance(resp_data, tuple):
+                tmp = []
+                for img in resp_data:
+                    tmp.append(base64_encode(img))
+                resp_data = tmp
+            else:
+                resp_data = [base64_encode(resp_data)]
         except Exception as e:
             raise e
         finally:

@@ -18,7 +18,7 @@ def affine(imgs, args):
     """
     rows, cols, channel = imgs[0].shape
     for point in args['post1'] + args['post2']:
-        if not utils.inArea(point, ((0, 0), (rows, cols))):
+        if not utils.inArea(np.float32(point), ((0, 0), (rows, cols))):
             raise Exception(f'affine: point {str(point)} lies outside the image.')
 
     post1 = np.float32(args['post1'])

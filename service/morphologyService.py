@@ -20,7 +20,8 @@ def erode(imgs, args):
     kernelType: 结构元类型
     kernelSize: (x, y) 结构元大小
     """
-    kernel = cv2.getStructuringElement(structure[args['kernelType']], args['kernelSize'])
+    ksize = int(args['kernelSize'])
+    kernel = cv2.getStructuringElement(structure[args['kernelType']], (ksize, ksize))
     res = cv2.erode(imgs[0], kernel)
     return res
 
@@ -31,7 +32,8 @@ def dilate(imgs, args):
     kernelType: 结构元类型
     kernelSize: (x, y) 结构元大小
     """
-    kernel = cv2.getStructuringElement(structure[args['kernelType']], args['kernelSize'])
+    ksize = int(args['kernelSize'])
+    kernel = cv2.getStructuringElement(structure[args['kernelType']], (ksize, ksize))
     res = cv2.dilate(imgs[0], kernel)
     return res
 
@@ -42,7 +44,8 @@ def morphOpen(imgs, args):
     kernelType: 结构元类型
     kernelSize: (x, y) 结构元大小
     """
-    kernel = cv2.getStructuringElement(structure[args['kernelType']], args['kernelSize'])
+    ksize = int(args['kernelSize'])
+    kernel = cv2.getStructuringElement(structure[args['kernelType']], (ksize, ksize))
     res = cv2.morphologyEx(imgs[0], cv2.MORPH_OPEN, kernel)
     return res
 
@@ -53,6 +56,7 @@ def morphClose(imgs, args):
     kernelType: 结构元类型
     kernelSize: (x, y) 结构元大小
     """
-    kernel = cv2.getStructuringElement(structure[args['kernelType']], args['kernelSize'])
+    ksize = int(args['kernelSize'])
+    kernel = cv2.getStructuringElement(structure[args['kernelType']], (ksize, ksize))
     res = cv2.morphologyEx(imgs[0], cv2.MORPH_CLOSE, kernel)
     return res

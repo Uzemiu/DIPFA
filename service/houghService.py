@@ -26,9 +26,9 @@ def hough(imgs, args):
     houghThreshold: hough 变换阈值
     """
     bsize = int(args['blurSize'])
-    edges = getEdges(imgs[0], bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
+    edges = getEdges(imgs[0], bsize, threshold1=int(args['cannyThreshold1']), threshold2=int(args['cannyThreshold2']))
 
-    lines = cv2.HoughLines(edges, rho=1, theta=np.pi / 2, threshold=args['houghThreshold'])
+    lines = cv2.HoughLines(edges, rho=1, theta=np.pi / 2, threshold=int(args['houghThreshold']))
 
     result = imgs[0].copy()
     for i_line in lines:
@@ -57,10 +57,10 @@ def houghP(imgs, args):
     maxLineGap: 认为在同一直线上的两点之间的最大间隙。
     """
     bsize = int(args['blurSize'])
-    edges = getEdges(imgs[0], bsize, threshold1=args['cannyThreshold1'], threshold2=args['cannyThreshold2'])
+    edges = getEdges(imgs[0], bsize, threshold1=int(args['cannyThreshold1']), threshold2=int(args['cannyThreshold2']))
 
-    linesP = cv2.HoughLinesP(edges, rho=1, theta=np.pi / 180, threshold=args['houghPThreshold'],
-                             minLineLength=args['minLineLength'], maxLineGap=args['maxLineGap'])
+    linesP = cv2.HoughLinesP(edges, rho=1, theta=np.pi / 180, threshold=int(args['houghThreshold']),
+                             minLineLength=int(args['minLineLength']), maxLineGap=int(args['maxLineGap']))
 
     result_P = imgs[0].copy()
     for i_P in linesP:

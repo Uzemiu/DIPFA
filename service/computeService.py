@@ -35,7 +35,7 @@ def scale(imgs, args):
     缩放
     dstX, dstY: 目标大小
     """
-    return cv2.resize(imgs[0], (int(args['dstX']), int(args['dstX'])), interpolation=cv2.INTER_LINEAR)
+    return cv2.resize(imgs[0], (int(args['xArg']), int(args['yArg'])), interpolation=cv2.INTER_LINEAR)
 
 
 def translate(imgs, args):
