@@ -37,7 +37,8 @@ const app = new Vue({
       '边缘检测',
       '图像增强',
       '形态学操作',
-      '噪声滤波'
+      '噪声滤波',
+      '其他'
     ],
     currentCollapseName: '',
     selectedAsideMenu: 0,
@@ -67,6 +68,11 @@ const app = new Vue({
       yArg: 0,
       deg: 0
     },
+    flipOp: [
+      ['flipHor', '水平翻转'],
+      ['flipVer', '垂直翻转']
+    ],
+    // 边缘检测
     edgeOp: [
       ['roberts', 'Roberts'],
       ['sobel', 'Sobel'],
@@ -80,6 +86,7 @@ const app = new Vue({
       threshold1: 50,
       threshold2: 150
     },
+    // 噪声
     noiseOp: [
       ['spNoise', '椒盐噪声'],
       ['gaussianNoise', '高斯噪声'],
@@ -90,6 +97,7 @@ const app = new Vue({
       mean: 0,
       sigma: 25
     },
+    // 滤波01
     blurOp: [
       ['avgBlur', '均值滤波'],
       ['medBlur', '中值滤波'],
@@ -102,6 +110,7 @@ const app = new Vue({
       y: 3,
       ksize: 3
     },
+    // 滤波02
     selectiveOp: [
       ['lowPass', '低通滤波'],
       ['highPass', '高通滤波'],
@@ -111,7 +120,35 @@ const app = new Vue({
     selectiveArgs: {
       threshold1: 0,
       threshold2: 255
-    }
+    },
+    // 形态学操作
+    morphOp: [
+      ['morphOpen', '开操作'],
+      ['morphClose', '闭操作'],
+      ['morphErode', '腐蚀'],
+      ['morphDilation', '膨胀'],
+    ],
+    morphArgs: {
+      ssize: 5,
+      structure: 0
+    },
+    // 频域的平滑/频域的锐化
+    filterOp1: [
+      ['lpFilter', '理想低通滤波'],
+      ['hpFilter', '理想高通滤波'],
+      ['blpFilter', '巴特沃兹低通滤波'],
+      ['bhpFilter', '巴特沃兹高通滤波'],
+      ['glpFilter', '高斯低通滤波'],
+      ['ghpFilter', '高斯高通滤波'],
+    ],
+    filterArgs1: {
+      d0: 50,
+      n: 2
+    },
+    // 频域的平滑
+    filterOp2: [
+      
+    ],
   },
   methods: {
     selectAsideCollapse(index){
