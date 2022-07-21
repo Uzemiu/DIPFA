@@ -12,9 +12,10 @@ import utils
 
 def affine(imgs, args):
     """
-    仿射变化
-    post1: [[x1, y1], [x2, y2], [x3, y3]]  三个点
-    post2: [[x1, y1], [x2, y2], [x3, y3]]  三个点
+    仿射变换
+    post1: Array<Tuple<float, float>> | [[x1, y1], [x2, y2], [x3, y3]]  三个点
+    post2: Array<Tuple<float, float>> | [[x1, y1], [x2, y2], [x3, y3]]  三个点
+    :return: img
     """
     rows, cols, channel = imgs[0].shape
     for point in args['post1'] + args['post2']:

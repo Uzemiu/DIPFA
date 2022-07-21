@@ -4,10 +4,11 @@
 @Author: csc
 @Date : 2022/7/19
 """
-import json
+import pytest
 
 import cv2
 import service.affineService as affineService
+from main import display
 
 img = cv2.imread('./img.jpg')
 args = {
@@ -18,5 +19,4 @@ args = {
 
 def test_Affine():
     res = affineService.affine([img], args)
-    cv2.imshow('affine', res)
-    cv2.waitKey(0)
+    display('affine', res)

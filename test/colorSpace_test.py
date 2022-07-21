@@ -1,4 +1,3 @@
-import pytest
 import cv2
 import service.colorSpaceService as colorSpaceService
 
@@ -19,7 +18,3 @@ def test_getHSV():
     _, _s, _ = cv2.split(s)
     _, _, _v = cv2.split(v)
     assert (cv2.cvtColor(img, cv2.COLOR_BGR2HSV) == cv2.merge([_h, _s, _v])).all()
-
-
-if __name__ == '__main__':
-    pytest.main()
