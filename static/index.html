@@ -77,10 +77,10 @@
                 </el-form-item>
               </template>
               <template v-if="command==='scale' || command==='translate'">
-                <el-form-item :label="command==='scale' ? 'x轴缩放' : 'x平移距离'">
+                <el-form-item :label="command==='scale' ? 'x缩放比例' : 'x平移距离'">
                   <el-input v-model="geometricOpArgs.xArg" size="medium"></el-input>
                 </el-form-item>
-                <el-form-item :label="command==='scale' ? 'y轴缩放' : 'y平移距离'">
+                <el-form-item :label="command==='scale' ? 'y缩放比例' : 'y平移距离'">
                   <el-input v-model="geometricOpArgs.yArg" size="medium"></el-input>
                 </el-form-item>
               </template>
