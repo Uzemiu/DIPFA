@@ -14,10 +14,31 @@ python3.7+
 pip install -r requirements.txt
 ```
 
-<code>models</code>下包含风格迁移的模型文件下载地址，需手动下载
+<code>models</code>下包含风格迁移的模型文件下载地址，需运行 models.bat 和 myModels.bat 下载
 ```
 - models
+  - style_transfer
+    - COCO2014_1000
+      - *.png
+    - metanet_base32_style300000.0_tv1e-06_tagnohvd.pth
+    - metanet_base32_style300000.0_tv1e-06_tagnohvd_transform_net.pth
   - candy.t7
   - feathers.t7
   - *.t7
+```
+myModels.bat 受限于服务器带宽，所以下载需要约 30 min。\
+为了减少下载时间:
+1. 如果本地已经有完整的 COCO2014，可以运行 genCOCO2014_1000.py 脚本生成数据集 \
+如果没有，可以运行 getCOCO2014_1000.bat 下载， \
+也可以从[这里](http://images.cocodataset.org/zips/train2014.zip)下载，解压并运行 genCOCO2014_1000.py 脚本 \
+需要修改 genCOCO2014_1000.py
+```python
+
+```
+2. 目前已经将 vgg19 改成了 pretrained=True，通过 torchvision 下载。 \
+如果下载不了的话可以找其他的源下载，并修改代码，\
+或者运行 getVgg19.bat 从服务器获取，享受极(慢)速(度)(约 20 min)
+```python
+vgg19 = models.vgg19(pretrained=False)
+vgg19.load_state_dict(torch.load(${模型路径}))
 ```
