@@ -16,7 +16,8 @@ const app = new Vue({
   data: {
     currentImage: null,
     secondImage: null,
-    resultImage: null,
+    resultImage: [],
+    disableReplace: false,
     images: [],
     inCrop: false,
     loading: false,
@@ -36,6 +37,7 @@ const app = new Vue({
       '图像增强',
       '形态学操作',
       '噪声滤波',
+      '风格迁移',
       '其他'
     ],
     currentCollapseName: '',
@@ -70,6 +72,13 @@ const app = new Vue({
       ['flipHor', '水平翻转'],
       ['flipVer', '垂直翻转']
     ],
+    affineOp: [
+      ['affine', '仿射变换']
+    ],
+    affineArgs: {
+      post1: [[0,0],[0,0],[0,0]],
+      post2: [[0,0],[0,0],[0,0]],
+    },
     // 边缘检测
     edgeOp: [
       ['roberts', 'Roberts'],
@@ -83,6 +92,18 @@ const app = new Vue({
       ksize: 3,
       threshold1: 50,
       threshold2: 150
+    },
+    houghOp: [
+      ['hough', '霍夫变换'],
+      ['houghP', '概率霍夫变换']
+    ],
+    houghArgs: {
+      blurSize: 3,
+      cannyThreshold1: 50,
+      cannyThreshold2: 150,
+      houghThreshold: 120,
+      minLineLength: 120,
+      maxLineGap: 15
     },
     // 噪声
     noiseOp: [
@@ -126,11 +147,12 @@ const app = new Vue({
       ['morphOpen', '开操作'],
       ['morphClose', '闭操作'],
       ['morphErode', '腐蚀'],
-      ['morphDilation', '膨胀'],
+      ['morphDilate', '膨胀'],
     ],
     morphArgs: {
-      ssize: 5,
-      structure: 0
+      kernelX: 5,
+      kernelY: 5,
+      kernelType: 0
     },
     // 频域的平滑/频域的锐化
     filterOp1: [
@@ -152,6 +174,23 @@ const app = new Vue({
       ['prewittGrad', 'Prewitt算子'],
       ['laplacianGrad', 'Laplacian算子'],
     ],
+    // 其他
+    otherOp: [
+      ['hist', '直方图统计'],
+      ['getRGB', 'RGB'],
+      ['getHSV', 'HSV']
+    ],
+    // 风格迁移
+    transferOp: [
+      ['transfer', '风格迁移']
+    ],
+    transferModels: [
+      'candy', 'composition_vii', 'feathers', 'la_muse', 'la_muse_eccv16',
+      'mosaic', 'starry_night', 'the_scream', 'the_wave', 'udnie'
+    ],
+    transferArgs: {
+      model: ''
+    }
   },
   methods: {
     selectAsideCollapse(index){
@@ -166,11 +205,15 @@ const app = new Vue({
       this.command = command;
     },
     replaceResultImage(){
-      this.images[this.currentImage] = this.resultImage;
+      this.getImageInfo(this.resultImage[0]).then(info => {
+        this.images[this.currentImage] = info
+      })
       this.dialogVisible = false;
     },
     addResultImage(){
-      this.images.push(this.resultImage);
+      this.resultImage.forEach(e => {
+        this.addImage(e)
+      })
       this.dialogVisible = false;
     },
     //---crop---
@@ -183,14 +226,18 @@ const app = new Vue({
       this.inCrop = false;
     },
     endCrop(){
+      const cropper = this.$refs.cropper;
       this.$refs.cropper.getCropData(data => {
-        this.images[this.currentImage] = data;
+        this.images[this.currentImage].data = data;
+        this.images[this.currentImage].width = cropper.cropW
+        this.images[this.currentImage].height = cropper.cropH
         this.inCrop = false;
       })
     },
     onCropperMove(preview){
-      this.displayCropperHeight = preview.h >> 0;
-      this.displayCropperWidth = preview.w >> 0;
+      const cropper = this.$refs.cropper;
+      this.displayCropperHeight = Math.round(cropper.cropH)
+      this.displayCropperWidth = Math.round(cropper.cropW)
     },
     setCropperSize(){
       this.cropper.width = this.displayCropperWidth;
@@ -222,7 +269,7 @@ const app = new Vue({
         this.$message.warning('未选择图片');
         return;
       }
-      const files = [this.images[this.currentImage]];
+      const files = [this.images[this.currentImage].data];
       if(this.multiInput){
         if(!this.secondImage){
           this.$message.warning('未选择第二张图片')
@@ -267,7 +314,7 @@ const app = new Vue({
         'Content-Type': 'multipart/form-data',
         signal: this.controller.signal
       }).then(data => {
-        this.resultImage = 'data:image/jpeg;base64,' + data.data;
+        this.resultImage = data.data.map(e => 'data:image/jpeg;base64,' + e);
         this.dialogVisible = true;
       }).catch(e => {
         console.error(e);
@@ -282,10 +329,7 @@ const app = new Vue({
     uploadImage(file, onload){
       const reader = new FileReader();
       reader.onload = onload || (e => {
-        this.images.push(e.target.result);
-        if(this.currentImage === null){
-          this.currentImage = 0;
-        }
+        this.addImage(e.target.result);
       });
       reader.readAsDataURL(file);
       return false;
@@ -296,13 +340,39 @@ const app = new Vue({
       })
       return false;
     },
-    closeDialog(){
-
+    getImageInfo(data){
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = data;
+        img.onload = () => {
+          resolve({
+            width: img.width,
+            height: img.height,
+            data: data,
+            tag: ''
+          })
+        }
+      })
+    },
+    addImage(data, tag=''){
+      this.getImageInfo(data).then(info => {
+        info.tag = tag;
+        this.images.push(info);
+        if(this.currentImage === null){
+          this.currentImage = 0;
+        }
+      })
+    },
+    deleteImage(index){
+      this.images.splice(index, 1);
+      if(this.currentImage >= index){
+        this.currentImage = this.images.length === 0 ? null : Math.max(this.currentImage-1, 0);
+      }
     }
   },
   computed: {
     multiInput(){
       return this.currentCollapseName.indexOf('[mul]') >= 0 && this.command !== 'not';
-    }
+    },
   }
 });

@@ -64,7 +64,7 @@ def scale(imgs, args):
     xArg, yArg: int, int | x, y 方向上的缩放比例
     :return: img
     """
-    return cv2.resize(imgs[0], (int(args['x']), int(args['y'])), fx=float(args['xArg']), fy=float(args['yArg']), interpolation=cv2.INTER_LINEAR)
+    return cv2.resize(imgs[0], (int(args['xArg']), int(args['yArg'])), interpolation=cv2.INTER_LINEAR)
 
 
 def translate(imgs, args):

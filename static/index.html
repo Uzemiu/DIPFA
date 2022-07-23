@@ -103,6 +103,31 @@
             </el-button-group>
             <el-button type="primary" @click="confirmAction" size="medium">确 定</el-button>
           </el-collapse-item>
+          <el-collapse-item title="仿射变换" name="compute-05">
+            <el-button-group>
+              <el-button v-for="(op,i) in affineOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="top" label-width="50px">
+              <el-form-item label="pose1">
+                <div v-for="(pose, i) in affineArgs.post1" :key="i">
+                  <span>x{{i+1}} </span><el-input style="width:40%" v-model="affineArgs.post1[i][0]" size="medium" :placeholder="'x'+(i+1)"></el-input>
+                  <span> y{{i+1}} </span><el-input style="width:40%" v-model="affineArgs.post1[i][1]" size="medium" :placeholder="'y'+(i+1)"></el-input>
+                </div>
+              </el-form-item>
+              <el-form-item label="pose2">
+                <div v-for="(pose, i) in affineArgs.post2" :key="i">
+                  <span>x{{i+1}} </span><el-input style="width:40%" v-model="affineArgs.post2[i][0]" size="medium" :placeholder="'x'+(i+1)"></el-input>
+                  <span> y{{i+1}} </span><el-input style="width:40%" v-model="affineArgs.post2[i][1]" size="medium" :placeholder="'y'+(i+1)"></el-input>
+                </div>
+              </el-form-item>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(affineArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
         </template>
 
         <!-- 边缘检测 -->
@@ -135,6 +160,40 @@
               </template>
             </el-form>
             <el-button type="primary" @click="confirmAction(edgeArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+
+          <el-collapse-item title="霍弗变换" name="edge-02">
+            <el-button-group>
+              <el-button v-for="(op,i) in houghOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="84px">
+              <el-form-item label="滤波器大小">
+                <el-input v-model="houghArgs.blurSize" size="medium"></el-input>
+              </el-form-item>
+              <el-form-item label="canny检测阈值1">
+                <el-input v-model="houghArgs.cannyThreshold1" size="medium"></el-input>
+              </el-form-item>
+              <el-form-item label="canny检测阈值2">
+                <el-input v-model="houghArgs.cannyThreshold2" size="medium"></el-input>
+              </el-form-item>
+              <el-form-item label="霍夫变换阈值">
+                <el-input v-model="houghArgs.houghThreshold" size="medium"></el-input>
+              </el-form-item>
+              <template v-if="command === 'houghP'">
+                <el-form-item label="组成一条直线最小点数">
+                  <el-input v-model="houghArgs.minLineLength" size="medium"></el-input>
+                </el-form-item>
+                <el-form-item label="同一直线两点最大间隔">
+                  <el-input v-model="houghArgs.maxLineGap" size="medium"></el-input>
+                </el-form-item>
+              </template>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(houghArgs)" size="medium">确 定</el-button>
           </el-collapse-item>
         </template>
 
@@ -184,11 +243,14 @@
               </el-button-group>
             </el-button-group>
             <el-form class="geo-form" label-position="right" label-width="84px">
-              <el-form-item label="结构体大小">
-                <el-input v-model="morphArgs.ssize" size="medium"></el-input>
+              <el-form-item label="结构体X大小">
+                <el-input v-model="morphArgs.kernelX" size="medium"></el-input>
+              </el-form-item>
+              <el-form-item label="结构体Y大小">
+                <el-input v-model="morphArgs.kernelY" size="medium"></el-input>
               </el-form-item>
               <el-form-item label="结构体类型">
-                <el-radio-group v-model="morphArgs.structure" size="medium">
+                <el-radio-group v-model="morphArgs.kernelType" size="medium">
                   <el-radio :label="0">矩形</el-radio>
                   <el-radio :label="1">交叉型</el-radio>
                   <el-radio :label="2">椭圆形</el-radio>
@@ -275,6 +337,42 @@
           </el-collapse-item>
         </template>
 
+        <!-- 风格迁移 -->
+        <template v-if="6 == selectedAsideMenu">
+          <el-collapse-item class="transfer-section" title="风格迁移" name="transfer-01">
+            <el-button-group>
+              <el-button v-for="(op,i) in transferOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-form class="geo-form" label-position="right" label-width="84px">
+              <el-form-item label="风格类型">
+                <el-radio-group v-model="transferArgs.model" size="medium">
+                  <el-radio v-for="model in transferModels" :key="model" :label="model">{{model}}</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-form>
+            <el-button type="primary" @click="confirmAction(transferArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+        </template>
+
+        <!-- 其他 -->
+        <template v-if="7 == selectedAsideMenu">
+          <el-collapse-item title="直方图/色域" name="pther-01">
+            <el-button-group>
+              <el-button v-for="(op,i) in otherOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
+                        size="medium">{{op[1]}}</el-button>
+              </el-button-group>
+            </el-button-group>
+            <el-button type="primary" @click="confirmAction" size="medium">确 定</el-button>
+          </el-collapse-item>
+        </template>
       </el-collapse>
 
     </div>
@@ -282,6 +380,12 @@
 
   <div class="display-section">
     <div class="img-container">
+      <div class="img-info-container" v-if="currentImage !== null ">
+        <p v-if="images[currentImage].tag">标签: {{images[currentImage].tag}}</p>
+        <p>宽度: {{images[currentImage].width}}</p>
+        <p>高度: {{images[currentImage].height}}</p>
+      </div>
+
       <div class="el-loading-mask" v-if="loading">
         <div class="el-loading-spinner">
           <svg viewBox="25 25 50 50" class="circular"><circle cx="50" cy="50" r="20" fill="none" class="path"></circle></svg>
@@ -294,7 +398,7 @@
           v-if="inCrop"
           ref="cropper" 
           class="img-cropper" 
-          :img="currentImage === null ? '' : images[currentImage]"
+          :img="currentImage === null ? '' : images[currentImage].data"
           :output-size="1"
           :auto-crop="true"
           :auto-crop-width="cropper.width"
@@ -307,7 +411,7 @@
       <img v-else 
            class="current-image" 
            :class="multiInput ? 'half-width' : ''"
-           :src="currentImage === null ? '' : images[currentImage]" 
+           :src="currentImage === null ? '' : images[currentImage].data"
            alt="">
       
       <!-- second img uploader -->
@@ -331,17 +435,26 @@
       </div>
     </div>
     <div class="img-selector">
-      <img class="img-selector-item" 
-           v-for="(img,i) in images" 
+      <div class="img-selector-wrapper" v-for="(img,i) in images" :key="i">
+        <div class="img-selector-float">
+          <span class="img-tag">{{img.tag}}</span>
+          <span style="float:right">
+            <!-- <i class="action el-icon-price-tag"></i> -->
+            <i class="action el-icon-delete" @click="deleteImage(i)"></i>
+          </span>
+        </div>
+        <img class="img-selector-item"
            @click="switchImage(i)"
-           :src="img" 
+           :src="img.data"
            alt="">
+      </div>
+
       <el-upload
         class="img-uploader"
         action="#"
         :show-file-list="false"
         :before-upload="uploadImage">
-        <el-button size="small" type="primary">点击上传</el-button>
+        <el-button size="small" type="primary">添加图片</el-button>
       </el-upload>
     </div>
   </div>
@@ -350,9 +463,11 @@
     title="提示"
     :visible.sync="dialogVisible"
     width="50%">
-    <img class="result-image" :src="resultImage" alt="">
+    <div v-for="(img,i) in resultImage" :key="i">
+      <img class="result-image" :src="img" alt="">
+    </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="replaceResultImage">替换当前图像</el-button>
+      <el-button type="primary" @click="replaceResultImage" :disabled="resultImage.length > 1">替换当前图像</el-button>
       <el-button type="primary" @click="addResultImage">添加为新图像</el-button>
       <el-button @click="dialogVisible = false">取 消</el-button>
     </span>

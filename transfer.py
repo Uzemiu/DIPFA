@@ -26,7 +26,7 @@ def get_model_file(model='candy'):
 def style_transfer(input, model, median_filter=0):
     net = cv.dnn.readNetFromTorch(get_model_file(model))
 
-    frame = cv.imread(input, 1)
+    frame = input
     inWidth = frame.shape[1]
     inHeight = frame.shape[0]
     inp = cv.dnn.blobFromImage(frame, 1.0, (inWidth, inHeight),
