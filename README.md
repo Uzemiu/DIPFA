@@ -13,6 +13,13 @@ python3.7+
 ```
 pip install -r requirements.txt
 ```
+由于 cuda 版本不同，pytorch 和 torchvision 需要自行下载，建议从以下网站找到对应版本下载 whl 文件安装 \
+https://download.pytorch.org/whl/torch/
+https://download.pytorch.org/whl/torchvision/
+```python
+import torch
+torch.cuda.is_available() # 返回 True 才能使用 GPU
+```
 
 <code>models</code>下包含风格迁移的模型文件下载地址，需运行 models.bat 和 myModels.bat 下载
 ```
@@ -31,9 +38,9 @@ myModels.bat 受限于服务器带宽，所以下载需要约 30 min。\
 1. 如果本地已经有完整的 COCO2014，可以运行 genCOCO2014_1000.py 脚本生成数据集 \
 如果没有，可以运行 getCOCO2014_1000.bat 下载， \
 也可以从[这里](http://images.cocodataset.org/zips/train2014.zip)下载，解压并运行 genCOCO2014_1000.py 脚本 \
-需要修改 genCOCO2014_1000.py
+需要将 genCOCO2014_1000.py 的这行改成自己数据集的路径
 ```python
-
+src = "../../COCO2014/train2014"
 ```
 2. 目前已经将 vgg19 改成了 pretrained=True，通过 torchvision 下载。 \
 如果下载不了的话可以找其他的源下载，并修改代码，\
