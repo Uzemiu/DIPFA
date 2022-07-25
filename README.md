@@ -42,7 +42,7 @@ myModels.bat 受限于服务器带宽，所以下载需要约 30 min。\
 ```python
 src = "../../COCO2014/train2014"
 ```
-2. 目前已经将 vgg19 改成了 pretrained=True，通过 torchvision 下载。 \
+2. 目前已经将 vgg19 改成了 pretrained=True，通过 torchvision 下载，所以项目初次运行会先进行下载。 \
 如果下载不了的话可以找其他的源下载，并修改代码，\
 或者运行 getVgg19.bat 从服务器获取，享受极(慢)速(度)(约 20 min)
 ```python

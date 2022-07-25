@@ -11,12 +11,13 @@ import service.colorSpaceService
 import service.morphologyService as morphology_service
 import service.houghService as hough_service
 import service.affineService as affine_service
-import transfer
 import service.computeService as compute_service
 import service.edgeDetectionService as edge_detection_service
 import service.noiseBlurService as noise_blur_service
 import service.augmentService as augment_service
 import service.flipService as flip_service
+import transfer
+import myTransfer
 
 from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS, cross_origin
@@ -40,6 +41,10 @@ def base_response(status=200, message='ok', data=None):
 
 def style_transfer(images, args):
     return transfer.style_transfer(images[0], args['model'])
+
+
+def my_style_transfer(images, args=None):
+    return myTransfer.style_transfer(images[0], images[1])
 
 
 command_map = {
@@ -104,6 +109,7 @@ command_map = {
     'getHSV': service.colorSpaceService.getHSV,
     # 风格迁移
     'transfer': style_transfer,
+    'myTransfer': my_style_transfer
 }
 
 
