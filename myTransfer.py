@@ -73,12 +73,13 @@ data_transform = transforms.Compose([
     tensor_normalizer
 ])
 
-content_dataset = torchvision.datasets.ImageFolder('./models/COCO2014_1000/', transform=data_transform)
-
 style_weight = 3e5
 content_weight = 1
 tv_weight = 1e-6
 batch_size = 8
+
+content_dataset = torchvision.datasets.ImageFolder('./models/COCO2014_1000/', transform=data_transform)
+content_data_loader = torch.utils.data.DataLoader(content_dataset, batch_size=batch_size, shuffle=True)
 
 # style buffer
 buffer = {}
@@ -87,6 +88,7 @@ buffer = {}
 def style_transfer(style_img, content_img):
     transform_net = TransformNet(base, residuals='resnext').to(device)
     metanet = MetaNet(transform_net.get_param_dict()).to(device)
+    # 每次都加载一次来实现类似深拷贝的效果
     transform_net.load_state_dict(torch.load('./models/metanet_base32_style300000.0_tv1e-06_tagnohvd_transform_net.pth'))
     metanet.load_state_dict(torch.load('./models/metanet_base32_style300000.0_tv1e-06_tagnohvd.pth'))
 
@@ -99,7 +101,6 @@ def style_transfer(style_img, content_img):
                 trainable_param_shapes[name] = param.shape
 
     optimizer = optim.Adam(trainable_params.values(), 1e-3)
-    content_data_loader = torch.utils.data.DataLoader(content_dataset, batch_size=batch_size, shuffle=True)
 
     # hash
     key = imagehash.phash(Image.fromarray(style_img), hash_size=8, highfreq_factor=4)

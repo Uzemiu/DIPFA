@@ -44,7 +44,9 @@ def style_transfer(images, args):
 
 
 def my_style_transfer(images, args=None):
-    return myTransfer.style_transfer(images[0], images[1])
+    style_img = images[1]
+    content_img = images[0]
+    return myTransfer.style_transfer(style_img, content_img)
 
 
 command_map = {
