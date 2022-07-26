@@ -22,7 +22,7 @@ import torch
 torch.cuda.is_available() # 返回 True 才能使用 GPU
 ```
 
-#### 风格迁移说明
+### 风格迁移说明
 <code>models</code>下包含风格迁移的模型文件下载地址，需运行 models.bat 和 myModels.bat 下载 \
 其中，models.bat 下载固定风格任意内容的模型，myModels.bat 下载任意风格任意内容的模型。\
 任意风格任意内容迁移的代码、研究与报告见 ./style_transfer/。
@@ -57,3 +57,7 @@ vgg19.load_state_dict(torch.load(${模型路径}))
 ![style transfer](./images/style_transfer.png)
 如图，左侧为内容图，右侧为风格图。对于一张风格图，第一次运行会花费额外的时间（取决于设备）。
 之后风格图不变，更换内容图，进行迁移需要约 5-8s。
+
+### 后端文档说明
+采用 sphinx 自动生成 \
+起始页面: ./doc/_build/html/index.html
