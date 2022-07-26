@@ -77,10 +77,10 @@
                 </el-form-item>
               </template>
               <template v-if="command==='scale' || command==='translate'">
-                <el-form-item :label="command==='scale' ? '目标宽度' : 'x平移距离'">
+                <el-form-item :label="command==='scale' ? 'x缩放比例' : 'x平移距离'">
                   <el-input v-model="geometricOpArgs.xArg" size="medium"></el-input>
                 </el-form-item>
-                <el-form-item :label="command==='scale' ? '目标高度' : 'y平移距离'">
+                <el-form-item :label="command==='scale' ? 'y缩放比例' : 'y平移距离'">
                   <el-input v-model="geometricOpArgs.yArg" size="medium"></el-input>
                 </el-form-item>
               </template>
@@ -105,10 +105,10 @@
           </el-collapse-item>
           <el-collapse-item title="仿射变换" name="compute-05">
             <el-button-group>
-              <el-button v-for="(op,i) in affineOp" 
-                        :key="i" 
-                        @click="setCommand(op[0])" 
-                        :type="command===op[0] ? 'primary' : ''" 
+              <el-button v-for="(op,i) in affineOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
                         size="medium">{{op[1]}}</el-button>
               </el-button-group>
             </el-button-group>
@@ -161,13 +161,13 @@
             </el-form>
             <el-button type="primary" @click="confirmAction(edgeArgs)" size="medium">确 定</el-button>
           </el-collapse-item>
-          
+
           <el-collapse-item title="霍弗变换" name="edge-02">
             <el-button-group>
-              <el-button v-for="(op,i) in houghOp" 
-                        :key="i" 
-                        @click="setCommand(op[0])" 
-                        :type="command===op[0] ? 'primary' : ''" 
+              <el-button v-for="(op,i) in houghOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
                         size="medium">{{op[1]}}</el-button>
               </el-button-group>
             </el-button-group>
@@ -339,12 +339,12 @@
 
         <!-- 风格迁移 -->
         <template v-if="6 == selectedAsideMenu">
-          <el-collapse-item class="transfer-section" title="风格迁移" name="transfer-01">
+          <el-collapse-item class="transfer-section" title="固定风格任意内容" name="transfer-01">
             <el-button-group>
-              <el-button v-for="(op,i) in transferOp" 
-                        :key="i" 
-                        @click="setCommand(op[0])" 
-                        :type="command===op[0] ? 'primary' : ''" 
+              <el-button v-for="(op,i) in transferOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
                         size="medium">{{op[1]}}</el-button>
               </el-button-group>
             </el-button-group>
@@ -352,10 +352,21 @@
               <el-form-item label="风格类型">
                 <el-radio-group v-model="transferArgs.model" size="medium">
                   <el-radio v-for="model in transferModels" :key="model" :label="model">{{model}}</el-radio>
-                </el-radio-group> 
+                </el-radio-group>
               </el-form-item>
             </el-form>
             <el-button type="primary" @click="confirmAction(transferArgs)" size="medium">确 定</el-button>
+          </el-collapse-item>
+          <el-collapse-item class="transfer-section" title="任意风格任意内容" name="transfer-02[mul]">
+            <el-button-group>
+              <el-button v-for="(op,i) in myTransferOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
+                        size="medium">{{op[1]}}</el-button>
+            </el-button-group>
+            </br>
+            <el-button type="primary" @click="confirmAction" size="medium">确 定</el-button>
           </el-collapse-item>
         </template>
 
@@ -363,10 +374,10 @@
         <template v-if="7 == selectedAsideMenu">
           <el-collapse-item title="直方图/色域" name="pther-01">
             <el-button-group>
-              <el-button v-for="(op,i) in otherOp" 
-                        :key="i" 
-                        @click="setCommand(op[0])" 
-                        :type="command===op[0] ? 'primary' : ''" 
+              <el-button v-for="(op,i) in otherOp"
+                        :key="i"
+                        @click="setCommand(op[0])"
+                        :type="command===op[0] ? 'primary' : ''"
                         size="medium">{{op[1]}}</el-button>
               </el-button-group>
             </el-button-group>
@@ -411,7 +422,7 @@
       <img v-else 
            class="current-image" 
            :class="multiInput ? 'half-width' : ''"
-           :src="currentImage === null ? '' : images[currentImage].data" 
+           :src="currentImage === null ? '' : images[currentImage].data"
            alt="">
       
       <!-- second img uploader -->
@@ -435,7 +446,7 @@
       </div>
     </div>
     <div class="img-selector">
-      <div class="img-selector-wrapper" v-for="(img,i) in images" :key="i"> 
+      <div class="img-selector-wrapper" v-for="(img,i) in images" :key="i">
         <div class="img-selector-float">
           <span class="img-tag">{{img.tag}}</span>
           <span style="float:right">
@@ -445,10 +456,10 @@
         </div>
         <img class="img-selector-item"
            @click="switchImage(i)"
-           :src="img.data" 
+           :src="img.data"
            alt="">
       </div>
-      
+
       <el-upload
         class="img-uploader"
         action="#"

@@ -190,7 +190,11 @@ const app = new Vue({
     ],
     transferArgs: {
       model: ''
-    }
+    },
+    // 任意风格任意内容
+    myTransferOp: [
+      ['myTransfer', '风格迁移']
+    ]
   },
   methods: {
     selectAsideCollapse(index){
