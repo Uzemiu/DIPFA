@@ -18,7 +18,7 @@ from collections import defaultdict
 from utils import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = 'cpu'
+# device = 'cpu'
 
 
 class VGG(nn.Module):

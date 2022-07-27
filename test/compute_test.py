@@ -51,7 +51,7 @@ def test_divide():
 
 def test_scale():
     height, width, channel = img.shape
-    res = scale([img], {'dstX': width / 2, 'dstY': height / 2})
+    res = scale([img], {'xArg': int(width / 2), 'yArg': int(height / 2)})
     display('scale', res)
 
 

@@ -7,7 +7,7 @@
 import pytest
 import cv2
 
-show_img = True
+show_img = False
 
 
 def display(name: str, img) -> None:

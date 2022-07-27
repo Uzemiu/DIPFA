@@ -185,7 +185,7 @@ const app = new Vue({
       ['transfer', '风格迁移']
     ],
     transferModels: [
-      'candy', 'composition_vii', 'feathers', 'la_muse', 'la_muse_eccv16',
+      'candy', 'composition_vii', 'feather', 'la_muse', 'la_muse_eccv16',
       'mosaic', 'starry_night', 'the_scream', 'the_wave', 'udnie'
     ],
     transferArgs: {
