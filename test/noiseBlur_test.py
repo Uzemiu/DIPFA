@@ -44,7 +44,7 @@ def test_med_blur():
 
 
 def test_gaussian_blur():
-    res = noiseBlurService.gaussian_blur([blur], {'x': 0, 'y': 5})
+    res = noiseBlurService.gaussian_blur([blur], {'x': 3, 'y': 3})
     display('gaussian_blur', res)
 
 

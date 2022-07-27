@@ -61,7 +61,7 @@ def divide(imgs, args=None):
 def scale(imgs, args):
     """
     缩放
-    xArg, yArg: int, int | x, y 方向上的缩放比例
+    xArg, yArg: int, int | 目标大小
     :return: img
     """
     return cv2.resize(imgs[0], (int(args['xArg']), int(args['yArg'])), interpolation=cv2.INTER_LINEAR)

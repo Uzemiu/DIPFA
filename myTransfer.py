@@ -29,7 +29,7 @@ from utils import *
 from models import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = 'cpu'
+# device = 'cpu'
 
 
 class MetaNet(nn.Module):
