@@ -15,7 +15,7 @@ pip install -r requirements.txt
 python app.py # 默认在 127.0.0.1:5000
 ```
 如果打算使用 GPU，由于 cuda 版本不同，pytorch 和 torchvision 需要自行下载，建议从以下网站找到对应版本下载 whl 文件安装 \
-https://download.pytorch.org/whl/torch/
+https://download.pytorch.org/whl/torch/ \
 https://download.pytorch.org/whl/torchvision/
 ```python
 import torch
