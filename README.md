@@ -54,7 +54,7 @@ vgg19 = models.vgg19(pretrained=False)
 vgg19.load_state_dict(torch.load(${模型路径}))
 ```
 
-![style transfer](./images/style_transfer.png)
+![style transfer](docImg/style_transfer.png)
 如图，左侧为内容图，右侧为风格图。对于一张风格图，第一次运行会花费额外的时间（取决于设备）。
 之后风格图不变，更换内容图，进行迁移需要约 5-8s。
 
