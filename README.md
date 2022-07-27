@@ -15,7 +15,7 @@ pip install -r requirements.txt
 python app.py # 默认在 127.0.0.1:5000
 ```
 如果打算使用 GPU，由于 cuda 版本不同，pytorch 和 torchvision 需要自行下载，建议从以下网站找到对应版本下载 whl 文件安装 \
-https://download.pytorch.org/whl/torch/
+https://download.pytorch.org/whl/torch/ \
 https://download.pytorch.org/whl/torchvision/
 ```python
 import torch
@@ -54,7 +54,7 @@ vgg19 = models.vgg19(pretrained=False)
 vgg19.load_state_dict(torch.load(${模型路径}))
 ```
 
-![style transfer](./images/style_transfer.png)
+![style transfer](docImg/style_transfer.png)
 如图，左侧为内容图，右侧为风格图。对于一张风格图，第一次运行会花费额外的时间（取决于设备）。
 之后风格图不变，更换内容图，进行迁移需要约 5-8s。
 
